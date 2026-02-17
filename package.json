@@ -1,0 +1,21 @@
+{
+  "name": "work-calendar",
+  "version": "1.0.0",
+  "description": "Calendars connected to work - ICS calendar subscription service",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "echo \"No tests specified\" && exit 0"
+  },
+  "keywords": [
+    "calendar",
+    "ics",
+    "ical",
+    "work"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ical-generator": "^3.6.1"
+  }
+}
