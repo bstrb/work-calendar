@@ -1,0 +1,85 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:WritingScience2026-Schedule
+
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Stockholm:20260309T090000
+DTEND;TZID=Europe/Stockholm:20260309T120000
+DESCRIPTION:Roll call followed by lectures. Building your article, outlines (types of articles, audience). Section-specific topics (i): experimental section, introduction. Dr Tamara Church.
+SUMMARY:Writing Science: Lectures (AM)
+UID:writingscience-20260309-am@writingscience
+END:VEVENT
+
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Stockholm:20260309T130000
+DTEND;TZID=Europe/Stockholm:20260309T160000
+DESCRIPTION:Figures and tables. Section-specific topics (ii): results and discussion, conclusions. Scientific English, common traps/errors. Reviewing your work. Dr Tamara Church.
+SUMMARY:Writing Science: Lectures (PM)
+UID:writingscience-20260309-pm@writingscience
+END:VEVENT
+
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Stockholm:20260310T100000
+DTEND;TZID=Europe/Stockholm:20260310T120000
+DESCRIPTION:Lecture: Writing style, building an article with your advisor. Prof. Gunnar von Heijne.
+SUMMARY:Writing Science: Lecture (Writing style)
+UID:writingscience-20260310-lecture-style@writingscience
+END:VEVENT
+
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Stockholm:20260310T130000
+DTEND;TZID=Europe/Stockholm:20260310T134500
+DESCRIPTION:Meeting to introduce the exercise on improving a manuscript. Prof. Xiaodong Zou.
+SUMMARY:Writing Science: Meeting (Manuscript exercise intro)
+UID:writingscience-20260310-meeting-exercise-intro@writingscience
+END:VEVENT
+
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Stockholm:20260313T130000
+DTEND;TZID=Europe/Stockholm:20260313T150000
+DESCRIPTION:Exercise on improving a manuscript. Prof. Xiaodong Zou.
+SUMMARY:Writing Science: Exercise (Improve a manuscript)
+UID:writingscience-20260313-exercise-manuscript@writingscience
+END:VEVENT
+
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Stockholm:20260316T090000
+DTEND;TZID=Europe/Stockholm:20260316T110000
+DESCRIPTION:Lecture: Guest lecture by Editor in Chief ChemistryOpen and Chemistry-Methods. Dr Francesca Novara. Zoom: https://stockholmuniversity.zoom.us/j/68929843159
+SUMMARY:Writing Science: Guest lecture (Zoom)
+UID:writingscience-20260316-guest-zoom@writingscience
+END:VEVENT
+
+BEGIN:VEVENT
+DTSTART;VALUE=DATE:20260319
+DTEND;VALUE=DATE:20260320
+DESCRIPTION:Athena: Popular science description of your project; upload to the SU website of your group/your name.
+SUMMARY:Writing Science: Assignment 1 due
+UID:writingscience-20260319-assignment1@writingscience
+END:VEVENT
+
+BEGIN:VEVENT
+DTSTART;VALUE=DATE:20260320
+DTEND;VALUE=DATE:20260321
+DESCRIPTION:Athena: Upload your project description.
+SUMMARY:Writing Science: Assignment 2 due
+UID:writingscience-20260320-assignment2@writingscience
+END:VEVENT
+
+BEGIN:VEVENT
+DTSTART;VALUE=DATE:20260325
+DTEND;VALUE=DATE:20260326
+DESCRIPTION:Athena: Upload feedback to peer project and email to peer.
+SUMMARY:Writing Science: Assignment 3 due
+UID:writingscience-20260325-assignment3@writingscience
+END:VEVENT
+
+BEGIN:VEVENT
+DTSTART;VALUE=DATE:20260327
+DTEND;VALUE=DATE:20260328
+DESCRIPTION:Athena: Upload revised version of your project description.
+SUMMARY:Writing Science: Assignment 4 due
+UID:writingscience-20260327-assignment4@writingscience
+END:VEVENT
+
+END:VCALENDAR
