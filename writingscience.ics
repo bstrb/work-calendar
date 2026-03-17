@@ -43,11 +43,11 @@ UID:writingscience-20260313-exercise-manuscript@writingscience
 END:VEVENT
 
 BEGIN:VEVENT
-DTSTART;TZID=Europe/Stockholm:20260316T090000
-DTEND;TZID=Europe/Stockholm:20260316T110000
-DESCRIPTION:Lecture: Guest lecture by Editor in Chief ChemistryOpen and Chemistry-Methods. Dr Francesca Novara. Zoom: https://stockholmuniversity.zoom.us/j/68929843159
+DTSTART;TZID=Europe/Stockholm:20260527T100000
+DTEND;TZID=Europe/Stockholm:20260527T120000
+DESCRIPTION:Lecture: Guest lecture by Editor in Chief ChemistryOpen and Chemistry-Methods. Dr Francesca Novara. Zoom: https://stockholmuniversity.zoom.us/j/68076509210
 SUMMARY:Writing Science: Guest lecture (Zoom)
-UID:writingscience-20260316-guest-zoom@writingscience
+UID:writingscience-20260527-guest-zoom@writingscience
 END:VEVENT
 
 BEGIN:VEVENT
@@ -67,19 +67,43 @@ UID:writingscience-20260320-assignment2@writingscience
 END:VEVENT
 
 BEGIN:VEVENT
-DTSTART;VALUE=DATE:20260325
-DTEND;VALUE=DATE:20260326
+DTSTART;VALUE=DATE:20260401
+DTEND;VALUE=DATE:20260402
 DESCRIPTION:Athena: Upload feedback to peer project and email to peer.
 SUMMARY:Writing Science: Assignment 3 due
-UID:writingscience-20260325-assignment3@writingscience
+UID:writingscience-20260401-assignment3@writingscience
 END:VEVENT
 
 BEGIN:VEVENT
-DTSTART;VALUE=DATE:20260327
-DTEND;VALUE=DATE:20260328
+DTSTART;VALUE=DATE:20260410
+DTEND;VALUE=DATE:20260411
 DESCRIPTION:Athena: Upload revised version of your project description.
 SUMMARY:Writing Science: Assignment 4 due
-UID:writingscience-20260327-assignment4@writingscience
+UID:writingscience-20260410-assignment4@writingscience
+END:VEVENT
+
+BEGIN:VEVENT
+DTSTART;VALUE=DATE:20260415
+DTEND;VALUE=DATE:20260416
+DESCRIPTION:Athena: Receive comments from Dr Tamara Church.
+SUMMARY:Writing Science: Comments received
+UID:writingscience-20260415-comments1@writingscience
+END:VEVENT
+
+BEGIN:VEVENT
+DTSTART;VALUE=DATE:20260420
+DTEND;VALUE=DATE:20260421
+DESCRIPTION:Athena: Upload final version of your project description.
+SUMMARY:Writing Science: Assignment 5 due
+UID:writingscience-20260420-assignment5@writingscience
+END:VEVENT
+
+BEGIN:VEVENT
+DTSTART;VALUE=DATE:20260504
+DTEND;VALUE=DATE:20260509
+DESCRIPTION:Athena: Receive comments from Dr Tamara Church.
+SUMMARY:Writing Science: Comments period
+UID:writingscience-20260504-comments2@writingscience
 END:VEVENT
 
 END:VCALENDAR
