@@ -141,6 +141,22 @@
       font: inherit;
     }
 
+    .toggle-button {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--panel-strong);
+      color: var(--text);
+      font: inherit;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .toggle-button:hover {
+      background: #efe0c9;
+    }
+
     .value-box {
       min-width: 64px;
       text-align: right;
@@ -304,9 +320,9 @@
           <label for="mu">Overall absorption strength μ (1/nm, log scale)</label>
           <div class="row">
             <div class="range-wrap">
-              <input id="mu" type="range" min="-15" max="-5" step="0.1" value="-10">
+              <input id="mu" type="range" min="-8" max="-7" step="0.1" value="-8">
             </div>
-            <div id="muReadout" class="value-box">1.00e-10</div>
+            <div id="muReadout" class="value-box">1.00e-08</div>
           </div>
         </div>
 
@@ -314,10 +330,14 @@
           <label for="cScale">Dynamical absorption scaling C (log scale)</label>
           <div class="row">
             <div class="range-wrap">
-              <input id="cScale" type="range" min="-10" max="10" step="0.1" value="0">
+              <input id="cScale" type="range" min="4" max="5" step="0.1" value="4">
             </div>
-            <div id="cScaleReadout" class="value-box">1.00e+0</div>
+            <div id="cScaleReadout" class="value-box">1.00e+04</div>
           </div>
+        </div>
+
+        <div class="control-group">
+          <button id="toggleAbsorption" class="toggle-button" type="button">Disable μ and C sliders (μ = 0)</button>
         </div>
 
         <div class="control-group">
@@ -387,6 +407,7 @@
       xi: document.getElementById("xi"),
       mu: document.getElementById("mu"),
       cScale: document.getElementById("cScale"),
+      toggleAbsorption: document.getElementById("toggleAbsorption"),
       showKinematical: document.getElementById("showKinematical"),
       showDynamical: document.getElementById("showDynamical"),
       enableOverlay: document.getElementById("enableOverlay"),
@@ -416,6 +437,7 @@
     const ANGSTROMS_PER_NM = 10;
 
     const palette = ["#8c3b1e", "#226f63", "#5d4ea1", "#bd7a18", "#3869b1", "#9b3059"];
+    let isAbsorptionDisabled = false;
 
     function fromLogSlider(control) {
       return 10 ** Number(control.value);
@@ -425,11 +447,23 @@
       return value.toExponential(2).replace("e+", "e");
     }
 
+    function getEffectiveMu() {
+      return isAbsorptionDisabled ? 0 : fromLogSlider(controls.mu);
+    }
+
+    function updateAbsorptionToggleState() {
+      controls.mu.disabled = isAbsorptionDisabled;
+      controls.cScale.disabled = isAbsorptionDisabled;
+      controls.toggleAbsorption.textContent = isAbsorptionDisabled
+        ? "Enable μ and C sliders"
+        : "Disable μ and C sliders (μ = 0)";
+    }
+
     function updateReadouts() {
       readouts.thickness.textContent = Number(controls.thickness.value).toFixed(0);
       readouts.sAbsMax.textContent = `±${Number(controls.sAbsMax.value).toFixed(3)}`;
       readouts.xi.textContent = Number(controls.xi.value).toFixed(0);
-      readouts.mu.textContent = formatLogValue(fromLogSlider(controls.mu));
+      readouts.mu.textContent = formatLogValue(getEffectiveMu());
       readouts.cScale.textContent = formatLogValue(fromLogSlider(controls.cScale));
       readouts.intensityOffset.textContent = `${Number(controls.intensityOffset.value).toFixed(2)}x`;
     }
@@ -715,7 +749,7 @@
       const tNm = Number(controls.thickness.value);
       const sAbsMax = Number(controls.sAbsMax.value);
       const xiNm = Number(controls.xi.value);
-      const mu = fromLogSlider(controls.mu);
+      const mu = getEffectiveMu();
       const cScale = fromLogSlider(controls.cScale);
       const xiA = ANGSTROMS_PER_NM * xiNm;
       const nPoints = POINT_COUNT;
@@ -852,6 +886,14 @@
       control.addEventListener("input", renderPlot);
       control.addEventListener("change", renderPlot);
     });
+
+    controls.toggleAbsorption.addEventListener("click", () => {
+      isAbsorptionDisabled = !isAbsorptionDisabled;
+      updateAbsorptionToggleState();
+      renderPlot();
+    });
+
+    updateAbsorptionToggleState();
     renderPlot();
   </script>
 </body>
