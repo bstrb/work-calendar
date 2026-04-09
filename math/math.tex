@@ -340,13 +340,14 @@ I_{\mathrm{kin}}(w)\propto
 \operatorname{sinc}^2\!\left(\frac{t}{\xi}w\right).
 \]
 
-\section{Why the dynamical case is different}
+
+\section{Simplified two-beam dynamical derivation}
+
+\subsection{Why the dynamical case is different}
 
 In the kinematical derivation, the transmitted beam was assumed to remain effectively unchanged, so the diffracted amplitude could be written as a single coherent thickness integral.
 
 In the dynamical case, this approximation is no longer valid. The transmitted and diffracted beams exchange amplitude continuously as they propagate through the crystal. One must therefore solve the coupled system in Eqs.~\eqref{du0dz} and \eqref{dugdz}, rather than evaluate a single integral.
-
-\section{Simplified two-beam dynamical derivation}
 
 \subsection{Two-beam coupled system}
 
@@ -395,18 +396,12 @@ Then
 \frac{d\mathbf{u}}{dz}=i\pi M\mathbf{u}.
 \]
 
-\subsection{Formal solution}
-
-The solution is
+The formal solution is
 \[
 \mathbf{u}(z)=e^{i\pi zM}\mathbf{u}(0).
 \]
 
-So the problem reduces to evaluating the matrix exponential.
-
-\subsection{Compute \(M^2\)}
-
-We compute
+So the problem reduces to evaluating the matrix exponential. We compute $M^2$
 \[
 M^2=
 \begin{pmatrix}
@@ -418,10 +413,9 @@ s & 1/\xi\\
 1/\xi & -s
 \end{pmatrix}
 =
-\left(s^2+\frac{1}{\xi^2}\right)I.
+\left(s^2+\frac{1}{\xi^2}\right)I,
 \]
-
-Define
+and define
 \[
 \Omega=\sqrt{s^2+\frac{1}{\xi^2}}.
 \]
@@ -535,7 +529,7 @@ I_{\mathrm{dyn}}(t,s)
 }.
 \]
 
-\section{Equivalent sinc form of the dynamical expression}
+\subsection{Equivalent sinc form of the dynamical expression}
 
 Let
 \[
@@ -555,11 +549,7 @@ I_{\mathrm{dyn}}(w)
 }.
 \]
 
-Using
-\[
-\operatorname{sinc}(x)=\frac{\sin(\pi x)}{\pi x},
-\]
-with
+Using \eqref{eq:sincdef} with
 \[
 x=\frac{t}{\xi}\sqrt{1+w^2},
 \]
@@ -585,7 +575,7 @@ I_{\mathrm{dyn}}(w)
 \right).
 \]
 
-\section{Final comparison}
+\subsection{Comparison dynamical versus kinematical expressions}
 
 With \(w=\xi s\), the two rocking-curve expressions are
 \[
@@ -607,153 +597,22 @@ These expressions are not identical in general. In the weak-coupling regime \(t/
 
 \section{A simple nontrivial absorption model}
 
-A simple way to obtain a nontrivial absorptive modification of the dynamical rocking curve is to allow the two-beam coupling itself to become complex. Physically, this corresponds to introducing an imaginary component of the crystal potential, so that the coupling between the transmitted and diffracted beams is no longer purely real.
-
-We therefore replace
+A simple way to obtain a nontrivial absorptive modification of the dynamical rocking curve is to allow the two-beam coupling itself to become complex. To avoid repeating the previous matrix-exponential derivation, we reuse the non-absorbing solution and apply the substitution
 \[
 \frac{1}{\xi}
 \quad \longrightarrow \quad
 \gamma,
 \qquad
-\gamma =
+\gamma=
 \frac{1}{\xi}+i\frac{1}{\xi'},
 \]
-where \(\xi'\) is an absorptive length scale. The quantity \(\gamma\) has units of inverse length, just as \(1/\xi\) does.
+where \(\xi'\) is an absorptive length scale.
 
-\subsection{Modified two-beam coupled system}
-
-With this replacement, the coupled equations become
-\[
-\frac{d}{dz}
-\begin{pmatrix}
-u_0(z)\\
-u_{\mathbf g}(z)
-\end{pmatrix}
-=
-i\pi
-\begin{pmatrix}
-s & \gamma\\
-\gamma & -s
-\end{pmatrix}
-\begin{pmatrix}
-u_0(z)\\
-u_{\mathbf g}(z)
-\end{pmatrix},
-\]
-with entrance condition
-\[
-u_0(0)=1,
-\qquad
-u_{\mathbf g}(0)=0.
-\]
-
-Define
-\[
-\mathbf u(z)=
-\begin{pmatrix}
-u_0(z)\\
-u_{\mathbf g}(z)
-\end{pmatrix},
-\qquad
-M_{\mathrm{abs}}=
-\begin{pmatrix}
-s & \gamma\\
-\gamma & -s
-\end{pmatrix}.
-\]
-
-Then
-\[
-\frac{d\mathbf u}{dz}=i\pi M_{\mathrm{abs}}\mathbf u.
-\]
-
-\subsection{Formal solution}
-
-The solution is
-\[
-\mathbf u(z)=e^{i\pi z M_{\mathrm{abs}}}\mathbf u(0).
-\]
-
-As before, the problem reduces to evaluating the matrix exponential.
-
-\subsection{Compute \(M_{\mathrm{abs}}^2\)}
-
-We compute
-\[
-M_{\mathrm{abs}}^2
-=
-\begin{pmatrix}
-s & \gamma\\
-\gamma & -s
-\end{pmatrix}
-\begin{pmatrix}
-s & \gamma\\
-\gamma & -s
-\end{pmatrix}
-=
-\left(s^2+\gamma^2\right)I.
-\]
-
-Define
+With the same entrance condition \(u_0(0)=1\), \(u_{\mathbf g}(0)=0\), define
 \[
 \Omega_{\mathrm{abs}}=\sqrt{s^2+\gamma^2}.
 \]
-
-Since \(\gamma\) is complex, \(\Omega_{\mathrm{abs}}\) is generally also complex. Then
-\[
-M_{\mathrm{abs}}^2=\Omega_{\mathrm{abs}}^2 I.
-\]
-
-\subsection{Evaluate the matrix exponential}
-
-Using the same power-series argument as in the non-absorbing case,
-\[
-e^{i\pi z M_{\mathrm{abs}}}
-=
-I\cos(\pi z\Omega_{\mathrm{abs}})
-+
-i\frac{\sin(\pi z\Omega_{\mathrm{abs}})}{\Omega_{\mathrm{abs}}}M_{\mathrm{abs}}.
-\]
-
-\subsection{Apply the entrance condition}
-
-Applying this to
-\[
-\mathbf u(0)=
-\begin{pmatrix}
-1\\
-0
-\end{pmatrix}
-\]
-gives
-\[
-\mathbf u(z)
-=
-\left[
-I\cos(\pi z\Omega_{\mathrm{abs}})
-+
-i\frac{\sin(\pi z\Omega_{\mathrm{abs}})}{\Omega_{\mathrm{abs}}}M_{\mathrm{abs}}
-\right]
-\begin{pmatrix}
-1\\
-0
-\end{pmatrix}.
-\]
-
-Since
-\[
-M_{\mathrm{abs}}
-\begin{pmatrix}
-1\\
-0
-\end{pmatrix}
-=
-\begin{pmatrix}
-s\\
-\gamma
-\end{pmatrix},
-\]
-the beam amplitudes are
+Then, by direct analogy with the non-absorbing two-beam result,
 \[
 u_0(z)=\cos(\pi z\Omega_{\mathrm{abs}})
 +i\frac{s}{\Omega_{\mathrm{abs}}}\sin(\pi z\Omega_{\mathrm{abs}}),
@@ -763,23 +622,15 @@ u_{\mathbf g}(z)=
 i\frac{\gamma}{\Omega_{\mathrm{abs}}}\sin(\pi z\Omega_{\mathrm{abs}}).
 \]
 
-\subsection{Absorbing dynamical intensity}
-
-The diffracted intensity is
+Hence
 \[
-I_{\mathrm{dyn,abs}}(z,s)\propto \abs{u_{\mathbf g}(z)}^2,
-\]
-so
-\[
-I_{\mathrm{dyn,abs}}(z,s)
-\propto
+I_{\mathrm{dyn,abs}}(z,s)\propto
 \left|
 \frac{\gamma}{\Omega_{\mathrm{abs}}}
 \sin(\pi z\Omega_{\mathrm{abs}})
-\right|^2.
+\right|^2,
 \]
-
-Setting \(z=t\),
+and at \(z=t\),
 \[
 I_{\mathrm{dyn,abs}}(t,s)
 \propto
@@ -788,15 +639,8 @@ I_{\mathrm{dyn,abs}}(t,s)
 \sin\!\left(\pi t\sqrt{s^2+\gamma^2}\right)
 \right|^2.
 \]
-Using \eqref{eq:sincdef}, we rewrite
-\[
-\sin\!\left(\pi t\sqrt{s^2+\gamma^2}\right)
-=
-\pi t\sqrt{s^2+\gamma^2}\,
-\operatorname{sinc}\!\left(t\sqrt{s^2+\gamma^2}\right).
-\]
 
-Therefore
+Using \eqref{eq:sincdef},
 \[
 I_{\mathrm{dyn,abs}}(t,s)
 \propto
@@ -805,9 +649,9 @@ I_{\mathrm{dyn,abs}}(t,s)
 \operatorname{sinc}\!\left(t\sqrt{s^2+\gamma^2}\right)
 \right|^2.
 \]
-This is a simple nontrivial two-beam absorptive extension of the dynamical rocking curve. Unlike the uniform damping model, absorption now changes the rocking-curve shape itself, because the effective oscillation parameter \(\Omega_{\mathrm{abs}}\) is complex.
+Because \(\gamma\) is complex, \(\Omega_{\mathrm{abs}}\) is generally complex as well, so absorption changes the rocking-curve shape itself (not only its overall scale).
 
-\subsection{Comparison with the kinematical absorbing case}
+\subsection{The kinematical absorbing case}
 
 In the kinematical case, a simple phenomenological way to include absorption is through a damped thickness integral, for example
 \[
@@ -841,44 +685,25 @@ Thus, in this next-simplest absorption treatment, the kinematical and dynamical 
 
 This is why the absorptive modification is no longer just a common overall prefactor.
 
-\subsection{Final form}
+\subsection{Final forms}
 
-The absorbing simplified two-beam dynamical rocking curve is therefore
+The absorbing simplified two-beam dynamical rocking curve is 
 \[
 I_{\mathrm{dyn,abs}}(t,s)
 \propto
+\pi^2 t^2 |\gamma|^2
 \left|
-\frac{\gamma}{\sqrt{s^2+\gamma^2}}
-\sin\!\left(\pi t\sqrt{s^2+\gamma^2}\right)
+\operatorname{sinc}\!\left(t\sqrt{s^2+\gamma^2}\right)
 \right|^2,
 \qquad
 \gamma=\frac{1}{\xi}+i\frac{1}{\xi'}.
 \]
 
-This reduces to the non-absorbing result when
+This reduces to the non-absorbing dynamical result when
 \[
 \frac{1}{\xi'}\to 0,
 \]
-since then \(\gamma \to 1/\xi\) and \(\Omega_{\mathrm{abs}}\to \sqrt{s^2+1/\xi^2}\).
-
-\section{Phenomenological identification of the absorption scales}
-
-The absorption parameters introduced in the kinematical and dynamical treatments are in general not identical at the level of the underlying derivation. In the kinematical model, absorption was represented by the damping coefficient \(\mu\), while in the dynamical model it was represented by the absorptive inverse length \(1/\xi'\) entering the complex coupling constant.
-
-For comparison purposes, however, it is convenient to relate the two through a phenomenological proportionality
-\[
-\frac{1}{\xi'} = C\mu,
-\]
-where \(C\) is a dimensionless model-dependent scale factor.
-It should not be interpreted as a universal constant that enforces one model to be always more or less absorption-sensitive than the other across all \(t,\xi,s,\mu\); that comparison depends on parameter regime.
-
-With this identification, both absorption parameters vanish simultaneously when
-\[
-\mu \to 0,
-\]
-so that both the kinematical and dynamical absorbing expressions reduce to their corresponding non-absorbing forms.
-
-\subsection{Kinematical case under this identification}
+since then \(\gamma \to 1/\xi\).
 
 The absorbing kinematical expression was
 \[
@@ -937,8 +762,24 @@ I_{\mathrm{kin,abs}}(t,s)
 \pi^2\left(\frac{t}{\xi}\right)^2\operatorname{sinc}^2(st),
 \]
 which is exactly the non-absorbing kinematical result.
+\section{Phenomenological identification of the absorption scales}
 
-\subsection{Dynamical case under this identification}
+The absorption parameters introduced in the kinematical and dynamical treatments are in general not identical at the level of the underlying derivation. In the kinematical model, absorption was represented by the damping coefficient \(\mu\), while in the dynamical model it was represented by the absorptive inverse length \(1/\xi'\) entering the complex coupling constant.
+
+For comparison purposes, however, it is convenient to relate the two through a phenomenological proportionality
+\[
+\frac{1}{\xi'} = C\mu,
+\]
+where \(C\) is a dimensionless model-dependent scale factor.
+It should not be interpreted as a universal constant that enforces one model to be always more or less absorption-sensitive than the other across all \(t,\xi,s,\mu\); that comparison depends on parameter regime.
+
+With this identification, both absorption parameters vanish simultaneously when
+\[
+\mu \to 0,
+\]
+so that both the kinematical and dynamical absorbing expressions reduce to their corresponding non-absorbing forms.
+
+\subsection{Final forms with a common absorption parameter}
 
 In the absorbing dynamical model, the complex coupling constant was defined as
 \[
@@ -953,75 +794,7 @@ this becomes
 \[
 \gamma=\frac{1}{\xi}+iC\mu.
 \]
-
-The absorbing dynamical rocking curve was
-\[
-I_{\mathrm{dyn,abs}}(t,s)
-\propto
-\left|
-\frac{\gamma}{\sqrt{s^2+\gamma^2}}
-\sin\!\left(\pi t\sqrt{s^2+\gamma^2}\right)
-\right|^2.
-\]
-
-Now let
-\[
-\mu \to 0.
-\]
-Then
-\[
-\gamma \to \frac{1}{\xi},
-\]
-and therefore
-\[
-\sqrt{s^2+\gamma^2}\to \sqrt{s^2+\frac{1}{\xi^2}}.
-\]
-
-Hence
-\[
-I_{\mathrm{dyn,abs}}(t,s)
-\to
-\left|
-\frac{1/\xi}{\sqrt{s^2+1/\xi^2}}
-\sin\!\left(\pi t\sqrt{s^2+\frac{1}{\xi^2}}\right)
-\right|^2.
-\]
-
-This is exactly the non-absorbing simplified two-beam dynamical result,
-\[
-I_{\mathrm{dyn}}(t,s)
-\propto
-\frac{1/\xi^2}{s^2+1/\xi^2}
-\sin^2\!\left(\pi t\sqrt{s^2+\frac{1}{\xi^2}}\right).
-\]
-Using \(w=\xi s\), the same baseline is
-\[
-I_{\mathrm{dyn}}(w)\propto
-\pi^2\left(\frac{t}{\xi}\right)^2
-\operatorname{sinc}^2\!\left(\frac{t}{\xi}\sqrt{1+w^2}\right),
-\]
-so the absorbing dynamical expression can be read as this sinc-based baseline multiplied by a \(\mu\)-dependent correction factor.
-
-\subsection{Interpretation}
-
-Thus, with the phenomenological identification
-\[
-\frac{1}{\xi'}=C\mu,
-\]
-both absorbing rocking-curve models recover their non-absorbing limits when
-\[
-\mu \to 0.
-\]
-
-This provides a convenient way to compare the kinematical and dynamical absorbing expressions using a common absorption scale, while still allowing the proportionality constant \(C\) to be adjusted later if desired.
-
-\subsection{Final forms with a common absorption parameter}
-
-Using
-\[
-\frac{1}{\xi'}=C\mu,
-\]
-the absorbing kinematical rocking curve is
+The absorbing kinematical rocking curve is
 \[
 I_{\mathrm{kin,abs}}(t,s)
 \propto
@@ -1030,7 +803,7 @@ I_{\mathrm{kin,abs}}(t,s)
 \frac{e^{2\pi i s t}-e^{-\mu t}}{2\pi i s+\mu}
 \right|^2,
 \]
-and the absorbing dynamical rocking curve is
+and the absorbing dynamical rocking curve becomes
 \[
 I_{\mathrm{dyn,abs}}(t,s)
 \propto
@@ -1045,13 +818,6 @@ t\sqrt{s^2+\left(\frac{1}{\xi}+iC\mu\right)^2}
 Both expressions reduce to their corresponding non-absorbing forms in the limit
 \[
 \mu\to 0.
-\]
-In particular,
-\[
-I_{\mathrm{kin,abs}}(t,s)\to I_{\mathrm{kin}}(t,s)\propto
-\pi^2\left(\frac{t}{\xi}\right)^2\operatorname{sinc}^2(st)
-=
-\pi^2\left(\frac{t}{\xi}\right)^2\operatorname{sinc}^2\!\left(\frac{t}{\xi}w\right).
 \]
 
 \end{document}

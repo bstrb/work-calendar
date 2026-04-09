@@ -541,7 +541,7 @@
       const decay = Math.exp(-muT);
       const numeratorAbsSq = (Math.cos(phase) - decay) ** 2 + Math.sin(phase) ** 2;
       const denominatorAbsSq = muT ** 2 + (2 * Math.PI * u) ** 2;
-      return (tOverXi ** 2) * (numeratorAbsSq / denominatorAbsSq);
+      return (Math.PI ** 2) * (tOverXi ** 2) * (numeratorAbsSq / denominatorAbsSq);
     }
 
     function intensityDynamicalAbsorbing(w, t, xi, mu, cScale) {
