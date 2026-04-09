@@ -1,0 +1,1057 @@
+\documentclass[11pt]{article}
+
+\usepackage[a4paper,margin=2.5cm]{geometry}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{bm}
+\usepackage{physics}
+\usepackage{hyperref}
+
+\title{Explicit Derivation of Kinematical and Simplified Two-Beam Dynamical Rocking Curves with Absorptive Extensions}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+\section*{Definitions and conventions}
+
+We define
+\[
+t = \text{crystal thickness}, \qquad
+s = \text{excitation error}, \qquad
+\xi = \text{extinction distance},
+\]
+and the dimensionless quantity
+\[
+w = \xi s.
+\]
+
+Here,
+\begin{itemize}
+    \item \(s=0\) corresponds to the exact Bragg condition,
+    \item \(s\) has units of inverse length,
+    \item \(\xi\) has units of length,
+    \item therefore both \(st\) and \(\xi s\) are dimensionless.
+\end{itemize}
+
+We define the normalized sinc function by
+\begin{equation}\label{eq:sincdef}
+\operatorname{sinc}(x)=\frac{\sin(\pi x)}{\pi x}.
+\end{equation}
+
+Throughout, \(u_0(z)\) denotes the transmitted-beam amplitude and \(u_{\mathbf g}(z)\) the diffracted-beam amplitude for reflection \(\mathbf g\).
+
+The purpose of this note is to derive:
+\begin{enumerate}
+    \item the kinematical rocking curve,
+    \item the simplified two-beam dynamical rocking curve,
+    \item a simple absorptive extension of the dynamical rocking curve, and
+    \item a phenomenological comparison of the absorption scales used in the kinematical and dynamical treatments.
+\end{enumerate}
+
+\section{Background: two-beam wavefield and coupled equations}
+
+If only the transmitted beam and one diffracted beam are retained, the crystal wavefield is written in the two-beam form
+\[
+\psi(\mathbf r)=u_0(z)e^{2\pi i \mathbf k\cdot \mathbf r}
++
+u_{\mathbf g}(z)e^{2\pi i (\mathbf k+\mathbf g)\cdot \mathbf r}.
+\]
+
+Here the exponential factors describe the fast oscillations, while the amplitudes \(u_0(z)\) and \(u_{\mathbf g}(z)\) vary with depth \(z\).
+
+We substitute this ansatz into a Schr\"odinger-type crystal wave equation
+\[
+\left[\nabla^2+K^2\right]\psi(\mathbf r)=V(\mathbf r)\psi(\mathbf r),
+\qquad
+V(\mathbf r)=\sum_{\mathbf h} V_{\mathbf h} e^{2\pi i \mathbf h\cdot \mathbf r}.
+\]
+
+\subsection*{Apply the Laplacian to each beam}
+
+For a term of the form
+\[
+u(z)e^{2\pi i \mathbf q\cdot \mathbf r},
+\]
+with \(\mathbf q\) constant and \(u\) depending only on \(z\),
+\[
+\nabla^2\!\left[u(z)e^{2\pi i \mathbf q\cdot \mathbf r}\right]
+=
+e^{2\pi i \mathbf q\cdot \mathbf r}
+\left(
+u''(z)+4\pi i q_z u'(z)-4\pi^2 |\mathbf q|^2 u(z)
+\right).
+\]
+
+Applying this to the two retained beams gives
+\[
+\nabla^2\!\left[u_0 e^{2\pi i \mathbf k\cdot \mathbf r}\right]
+=
+e^{2\pi i \mathbf k\cdot \mathbf r}
+\left(
+u_0''+4\pi i k_z u_0'-4\pi^2 |\mathbf k|^2 u_0
+\right),
+\]
+and
+\[
+\nabla^2\!\left[u_{\mathbf g} e^{2\pi i (\mathbf k+\mathbf g)\cdot \mathbf r}\right]
+=
+e^{2\pi i (\mathbf k+\mathbf g)\cdot \mathbf r}
+\left(
+u_{\mathbf g}''+4\pi i (k_z+g_z) u_{\mathbf g}'-4\pi^2 |\mathbf k+\mathbf g|^2 u_{\mathbf g}
+\right).
+\]
+
+Therefore,
+\begin{multline}
+(\nabla^2+K^2)\psi
+=
+e^{2\pi i \mathbf k\cdot \mathbf r}
+\left[
+u_0''+4\pi i k_z u_0'+(K^2-4\pi^2|\mathbf k|^2)u_0
+\right]
+\\
+{}+
+e^{2\pi i (\mathbf k+\mathbf g)\cdot \mathbf r}
+\left[
+u_{\mathbf g}''+4\pi i (k_z+g_z)u_{\mathbf g}'
++(K^2-4\pi^2|\mathbf k+\mathbf g|^2)u_{\mathbf g}
+\right].
+\end{multline}
+
+\subsection*{Expand the potential term and collect equal phases}
+
+Now multiply the potential by \(\psi\):
+\[
+V(\mathbf r)\psi(\mathbf r)
+=
+\left(\sum_{\mathbf h} V_{\mathbf h} e^{2\pi i \mathbf h\cdot \mathbf r}\right)
+\left[
+u_0 e^{2\pi i \mathbf k\cdot \mathbf r}
++
+u_{\mathbf g} e^{2\pi i (\mathbf k+\mathbf g)\cdot \mathbf r}
+\right].
+\]
+
+This produces terms of the form
+\[
+V_{\mathbf h}u_0 e^{2\pi i (\mathbf k+\mathbf h)\cdot \mathbf r},
+\qquad
+V_{\mathbf h}u_{\mathbf g} e^{2\pi i (\mathbf k+\mathbf g+\mathbf h)\cdot \mathbf r}.
+\]
+
+To match the phase \(e^{2\pi i \mathbf k\cdot \mathbf r}\), one must have
+\[
+\mathbf h=0 \quad \text{from the \(u_0\) term},
+\qquad
+\mathbf h=-\mathbf g \quad \text{from the \(u_{\mathbf g}\) term}.
+\]
+
+To match the phase \(e^{2\pi i (\mathbf k+\mathbf g)\cdot \mathbf r}\), one must have
+\[
+\mathbf h=\mathbf g \quad \text{from the \(u_0\) term},
+\qquad
+\mathbf h=0 \quad \text{from the \(u_{\mathbf g}\) term}.
+\]
+
+Thus, in the two-beam approximation, the only retained couplings are:
+\begin{itemize}
+    \item \(V_0\) acting on each beam,
+    \item \(V_{\mathbf g}\) coupling \(u_0 \to u_{\mathbf g}\),
+    \item \(V_{-\mathbf g}\) coupling \(u_{\mathbf g} \to u_0\).
+\end{itemize}
+
+This is exactly why the problem reduces to a \(2\times 2\) coupled system.
+
+Collecting coefficients of the two retained phase factors gives
+\[
+u_0''+4\pi i k_z u_0'
++
+\left(K^2-4\pi^2|\mathbf k|^2\right)u_0
+=
+V_0 u_0 + V_{-\mathbf g} u_{\mathbf g},
+\]
+\[
+u_{\mathbf g}''+4\pi i (k_z+g_z) u_{\mathbf g}'
++
+\left(K^2-4\pi^2|\mathbf k+\mathbf g|^2\right)u_{\mathbf g}
+=
+V_{\mathbf g} u_0 + V_0 u_{\mathbf g}.
+\]
+
+\subsection*{Slowly varying envelope approximation}
+
+Assuming that the amplitudes vary slowly with depth, one neglects the second derivatives:
+\[
+u_0'' \approx 0,
+\qquad
+u_{\mathbf g}'' \approx 0.
+\]
+
+After the standard rearrangement of common phase terms and absorption of constants into the conventional definitions of excitation error \(s\) and extinction distance \(\xi\), the equations can be written as
+\begin{equation}\label{du0dz}
+\frac{d u_0}{dz}= i\pi s\,u_0 + i\pi \frac{1}{\xi}u_{\mathbf g},
+\end{equation}
+\begin{equation}\label{dugdz}
+\frac{d u_{\mathbf g}}{dz}= i\pi \frac{1}{\xi}u_0 - i\pi s\,u_{\mathbf g}.
+\end{equation}
+
+In matrix form,
+\[
+\frac{d}{dz}
+\begin{pmatrix}
+u_0\\
+u_{\mathbf g}
+\end{pmatrix}
+=
+i\pi
+\begin{pmatrix}
+s & 1/\xi\\
+1/\xi & -s
+\end{pmatrix}
+\begin{pmatrix}
+u_0\\
+u_{\mathbf g}
+\end{pmatrix}.
+\]
+
+These same amplitudes \(u_0(z)\) and \(u_{\mathbf g}(z)\) are used in both the kinematical and dynamical treatments below. In the kinematical limit, one assumes \(u_0(z)\) remains approximately constant and derives a single thickness integral. The full derivation of that result is given in Section~\ref{sec:kinematical}. The kinematical and dynamical sections may be written in slightly different phase conventions; in the comparison below they are placed on a common normalized-sinc footing, and the local repair is only the overall prefactor consistency.
+
+\section{Kinematical rocking curve}\label{sec:kinematical}
+
+\subsection{Physical assumption}
+
+In the kinematical approximation, scattering into the diffracted beam is assumed to be weak, so that the transmitted beam is not significantly depleted as it propagates through the crystal. One therefore approximates
+\[
+u_0(z)\approx \text{constant},
+\]
+and with the usual normalization takes
+\[
+u_0(z)\approx 1.
+\]
+
+Under this assumption, the coupling back from the diffracted beam into the transmitted beam is neglected, and the diffracted amplitude is obtained from the diffracted-beam equation alone. Physically, this corresponds to single scattering.
+
+\subsection{Thickness integral from the same starting point}
+
+Before the symmetric phase convention leading to Eqs.~\eqref{du0dz} and \eqref{dugdz} is imposed, the diffracted-beam equation can be written schematically as
+\[
+\frac{d u_{\mathbf g}}{dz} - 2\pi i s\,u_{\mathbf g} = C\,u_0,
+\]
+where \(C\) is a coupling constant proportional to \(1/\xi\).
+
+Making the kinematical approximation \(u_0(z)\approx 1\) gives
+\[
+\frac{d u_{\mathbf g}}{dz} - 2\pi i s\,u_{\mathbf g} = C.
+\]
+
+This is a first-order linear inhomogeneous differential equation. Using the integrating factor
+\[
+e^{-2\pi i s z},
+\]
+one obtains
+\[
+\frac{d}{dz}\left(u_{\mathbf g}(z)e^{-2\pi i s z}\right)= C e^{-2\pi i s z}.
+\]
+
+Integrating from \(z=0\) to \(z=t\), with the entrance condition \(u_{\mathbf g}(0)=0\), yields
+\[
+u_{\mathbf g}(t)e^{-2\pi i s t}
+=
+C\int_0^t e^{-2\pi i s z}\,dz.
+\]
+
+Hence
+\[
+u_{\mathbf g}(t)
+=
+C e^{2\pi i s t}\int_0^t e^{-2\pi i s z}\,dz.
+\]
+
+Up to an overall phase factor, this is equivalent to
+\[
+u_{\mathbf g}^{(\mathrm{kin})}(t,s)
+\propto \frac{1}{\xi}\int_0^t e^{2\pi i s z}\,dz.
+\]
+
+Thus the usual kinematical thickness integral follows directly from the same two-beam starting point once the undepleted-beam approximation is made.
+
+\subsection{Evaluation of the integral}
+
+We now evaluate
+\[
+\int_0^t e^{2\pi i s z}\,dz.
+\]
+
+Since
+\[
+\int e^{2\pi i s z}\,dz
+=
+\frac{1}{2\pi i s}e^{2\pi i s z},
+\]
+it follows that
+\[
+u_{\mathbf g}^{(\mathrm{kin})}(t,s)
+\propto
+\frac{1}{\xi}\frac{e^{2\pi i s t}-1}{2\pi i s}.
+\]
+
+Rewrite the numerator as
+\[
+e^{2\pi i s t}-1
+=
+e^{\pi i s t}\left(e^{\pi i s t}-e^{-\pi i s t}\right)
+=
+e^{\pi i s t}\,2i\sin(\pi s t).
+\]
+
+Therefore,
+\[
+u_{\mathbf g}^{(\mathrm{kin})}(t,s)
+\propto
+\frac{1}{\xi}e^{\pi i s t}\frac{\sin(\pi s t)}{\pi s}.
+\]
+
+Multiplying and dividing by \(t\) gives
+\[
+u_{\mathbf g}^{(\mathrm{kin})}(t,s)
+=
+\frac{t}{\xi}\,e^{\pi i s t}\frac{\sin(\pi s t)}{\pi s t}
+=
+\frac{t}{\xi}\,e^{\pi i s t}\,\operatorname{sinc}(st).
+\]
+
+\subsection{Kinematical intensity}
+
+The diffracted intensity is proportional to the squared modulus of the amplitude:
+\[
+I_{\mathrm{kin}}(s)\propto \abs{u_{\mathbf g}^{(\mathrm{kin})}(t,s)}^2.
+\]
+
+Since \(\abs{e^{\pi i s t}}^2=1\), and under the same normalized-sinc prefactor convention used for comparison with the dynamical sinc rewrite, one obtains
+\[
+I_{\mathrm{kin}}(s)\propto \pi^2\left(\frac{t}{\xi}\right)^2 \operatorname{sinc}^2(st).
+\]
+
+Using \(w=\xi s\), this may also be written as
+\[
+I_{\mathrm{kin}}(w)\propto
+\pi^2\left(\frac{t}{\xi}\right)^2
+\operatorname{sinc}^2\!\left(\frac{t}{\xi}w\right).
+\]
+
+\section{Why the dynamical case is different}
+
+In the kinematical derivation, the transmitted beam was assumed to remain effectively unchanged, so the diffracted amplitude could be written as a single coherent thickness integral.
+
+In the dynamical case, this approximation is no longer valid. The transmitted and diffracted beams exchange amplitude continuously as they propagate through the crystal. One must therefore solve the coupled system in Eqs.~\eqref{du0dz} and \eqref{dugdz}, rather than evaluate a single integral.
+
+\section{Simplified two-beam dynamical derivation}
+
+\subsection{Two-beam coupled system}
+
+We start from
+\[
+\frac{d}{dz}
+\begin{pmatrix}
+u_0(z)\\
+u_{\mathbf g}(z)
+\end{pmatrix}
+=
+i\pi
+\begin{pmatrix}
+s & 1/\xi\\
+1/\xi & -s
+\end{pmatrix}
+\begin{pmatrix}
+u_0(z)\\
+u_{\mathbf g}(z)
+\end{pmatrix},
+\]
+with entrance condition
+\[
+u_0(0)=1,
+\qquad
+u_{\mathbf g}(0)=0.
+\]
+
+Define
+\[
+\mathbf{u}(z)=
+\begin{pmatrix}
+u_0(z)\\
+u_{\mathbf g}(z)
+\end{pmatrix},
+\qquad
+M=
+\begin{pmatrix}
+s & 1/\xi\\
+1/\xi & -s
+\end{pmatrix}.
+\]
+
+Then
+\[
+\frac{d\mathbf{u}}{dz}=i\pi M\mathbf{u}.
+\]
+
+\subsection{Formal solution}
+
+The solution is
+\[
+\mathbf{u}(z)=e^{i\pi zM}\mathbf{u}(0).
+\]
+
+So the problem reduces to evaluating the matrix exponential.
+
+\subsection{Compute \(M^2\)}
+
+We compute
+\[
+M^2=
+\begin{pmatrix}
+s & 1/\xi\\
+1/\xi & -s
+\end{pmatrix}
+\begin{pmatrix}
+s & 1/\xi\\
+1/\xi & -s
+\end{pmatrix}
+=
+\left(s^2+\frac{1}{\xi^2}\right)I.
+\]
+
+Define
+\[
+\Omega=\sqrt{s^2+\frac{1}{\xi^2}}.
+\]
+Then
+\[
+M^2=\Omega^2 I.
+\]
+
+\subsection{Evaluate the matrix exponential}
+
+Using the power-series expansion of the exponential,
+\[
+e^{i\pi zM}=\sum_{n=0}^{\infty}\frac{(i\pi zM)^n}{n!},
+\]
+and the relation \(M^2=\Omega^2 I\), the even and odd powers of \(M\) can be grouped separately:
+\[
+M^{2k}=\Omega^{2k}I,
+\qquad
+M^{2k+1}=\Omega^{2k}M.
+\]
+Therefore,
+\[
+e^{i\pi zM}
+=
+I\cos(\pi z\Omega)
++
+i\frac{\sin(\pi z\Omega)}{\Omega}M.
+\]
+
+\subsection{Apply the entrance condition}
+
+Applying this to
+\[
+\mathbf{u}(0)=
+\begin{pmatrix}
+1\\
+0
+\end{pmatrix}
+\]
+gives
+\[
+\mathbf{u}(z)
+=
+\left[
+I\cos(\pi z\Omega)
++
+i\frac{\sin(\pi z\Omega)}{\Omega}M
+\right]
+\begin{pmatrix}
+1\\
+0
+\end{pmatrix}.
+\]
+
+Since
+\[
+M
+\begin{pmatrix}
+1\\
+0
+\end{pmatrix}
+=
+\begin{pmatrix}
+s\\
+1/\xi
+\end{pmatrix},
+\]
+the beam amplitudes are
+\[
+u_0(z)=\cos(\pi z\Omega)+i\frac{s}{\Omega}\sin(\pi z\Omega),
+\]
+\[
+u_{\mathbf g}(z)=i\frac{1/\xi}{\Omega}\sin(\pi z\Omega).
+\]
+
+\subsection{Dynamical intensity}
+
+The diffracted intensity is
+\[
+I_{\mathrm{dyn}}(z,s)\propto \abs{u_{\mathbf g}(z)}^2,
+\]
+so
+\[
+I_{\mathrm{dyn}}(z,s)
+\propto
+\frac{1/\xi^2}{\Omega^2}\sin^2(\pi z\Omega).
+\]
+
+Using
+\[
+\Omega^2=s^2+\frac{1}{\xi^2},
+\]
+and then setting \(z=t\), we obtain
+\[
+I_{\mathrm{dyn}}(t,s)
+\propto
+\frac{1/\xi^2}{s^2+1/\xi^2}
+\sin^2\!\left(\pi t\sqrt{s^2+\frac{1}{\xi^2}}\right).
+\]
+
+Multiplying numerator and denominator by \(\xi^2\) gives
+\[
+I_{\mathrm{dyn}}(t,s)
+\propto
+\frac{
+\sin^2\!\left[
+\left(\frac{\pi t}{\xi}\right)\sqrt{1+(\xi s)^2}
+\right]
+}{
+1+(\xi s)^2
+}.
+\]
+
+\section{Equivalent sinc form of the dynamical expression}
+
+Let
+\[
+w=\xi s.
+\]
+
+Then
+\[
+I_{\mathrm{dyn}}(w)
+\propto
+\frac{
+\sin^2\!\left[
+\left(\frac{\pi t}{\xi}\right)\sqrt{1+w^2}
+\right]
+}{
+1+w^2
+}.
+\]
+
+Using
+\[
+\operatorname{sinc}(x)=\frac{\sin(\pi x)}{\pi x},
+\]
+with
+\[
+x=\frac{t}{\xi}\sqrt{1+w^2},
+\]
+one finds
+\[
+\sin^2\!\left[
+\left(\frac{\pi t}{\xi}\right)\sqrt{1+w^2}
+\right]
+=
+\pi^2\left(\frac{t}{\xi}\right)^2(1+w^2)
+\operatorname{sinc}^2\!\left(
+\frac{t}{\xi}\sqrt{1+w^2}
+\right).
+\]
+
+Therefore,
+\[
+I_{\mathrm{dyn}}(w)
+\propto
+\pi^2\left(\frac{t}{\xi}\right)^2
+\operatorname{sinc}^2\!\left(
+\frac{t}{\xi}\sqrt{1+w^2}
+\right).
+\]
+
+\section{Final comparison}
+
+With \(w=\xi s\), the two rocking-curve expressions are
+\[
+I_{\mathrm{kin}}(w)\propto
+\pi^2\left(\frac{t}{\xi}\right)^2
+\operatorname{sinc}^2\!\left(\frac{t}{\xi}w\right),
+\]
+and
+\[
+I_{\mathrm{dyn}}(w)\propto
+\pi^2\left(\frac{t}{\xi}\right)^2
+\operatorname{sinc}^2\!\left(
+\frac{t}{\xi}\sqrt{1+w^2}
+\right).
+\]
+
+Thus the kinematical result depends linearly on \(w\) in the sinc argument, whereas the simplified two-beam dynamical result replaces \(w\) by \(\sqrt{1+w^2}\), reflecting the coupled-wave nature of the propagation problem.
+These expressions are not identical in general. In the weak-coupling regime \(t/\xi \ll 1\), at fixed excitation error \(s\), the dynamical expression reduces to the kinematical line shape up to the same normalization convention. The condition of fixed \(s\) matters because fixing \(w=\xi s\) while varying \(\xi\) corresponds to a different physical detuning regime.
+
+\section{A simple nontrivial absorption model}
+
+A simple way to obtain a nontrivial absorptive modification of the dynamical rocking curve is to allow the two-beam coupling itself to become complex. Physically, this corresponds to introducing an imaginary component of the crystal potential, so that the coupling between the transmitted and diffracted beams is no longer purely real.
+
+We therefore replace
+\[
+\frac{1}{\xi}
+\quad \longrightarrow \quad
+\gamma,
+\qquad
+\gamma =
+\frac{1}{\xi}+i\frac{1}{\xi'},
+\]
+where \(\xi'\) is an absorptive length scale. The quantity \(\gamma\) has units of inverse length, just as \(1/\xi\) does.
+
+\subsection{Modified two-beam coupled system}
+
+With this replacement, the coupled equations become
+\[
+\frac{d}{dz}
+\begin{pmatrix}
+u_0(z)\\
+u_{\mathbf g}(z)
+\end{pmatrix}
+=
+i\pi
+\begin{pmatrix}
+s & \gamma\\
+\gamma & -s
+\end{pmatrix}
+\begin{pmatrix}
+u_0(z)\\
+u_{\mathbf g}(z)
+\end{pmatrix},
+\]
+with entrance condition
+\[
+u_0(0)=1,
+\qquad
+u_{\mathbf g}(0)=0.
+\]
+
+Define
+\[
+\mathbf u(z)=
+\begin{pmatrix}
+u_0(z)\\
+u_{\mathbf g}(z)
+\end{pmatrix},
+\qquad
+M_{\mathrm{abs}}=
+\begin{pmatrix}
+s & \gamma\\
+\gamma & -s
+\end{pmatrix}.
+\]
+
+Then
+\[
+\frac{d\mathbf u}{dz}=i\pi M_{\mathrm{abs}}\mathbf u.
+\]
+
+\subsection{Formal solution}
+
+The solution is
+\[
+\mathbf u(z)=e^{i\pi z M_{\mathrm{abs}}}\mathbf u(0).
+\]
+
+As before, the problem reduces to evaluating the matrix exponential.
+
+\subsection{Compute \(M_{\mathrm{abs}}^2\)}
+
+We compute
+\[
+M_{\mathrm{abs}}^2
+=
+\begin{pmatrix}
+s & \gamma\\
+\gamma & -s
+\end{pmatrix}
+\begin{pmatrix}
+s & \gamma\\
+\gamma & -s
+\end{pmatrix}
+=
+\left(s^2+\gamma^2\right)I.
+\]
+
+Define
+\[
+\Omega_{\mathrm{abs}}=\sqrt{s^2+\gamma^2}.
+\]
+
+Since \(\gamma\) is complex, \(\Omega_{\mathrm{abs}}\) is generally also complex. Then
+\[
+M_{\mathrm{abs}}^2=\Omega_{\mathrm{abs}}^2 I.
+\]
+
+\subsection{Evaluate the matrix exponential}
+
+Using the same power-series argument as in the non-absorbing case,
+\[
+e^{i\pi z M_{\mathrm{abs}}}
+=
+I\cos(\pi z\Omega_{\mathrm{abs}})
++
+i\frac{\sin(\pi z\Omega_{\mathrm{abs}})}{\Omega_{\mathrm{abs}}}M_{\mathrm{abs}}.
+\]
+
+\subsection{Apply the entrance condition}
+
+Applying this to
+\[
+\mathbf u(0)=
+\begin{pmatrix}
+1\\
+0
+\end{pmatrix}
+\]
+gives
+\[
+\mathbf u(z)
+=
+\left[
+I\cos(\pi z\Omega_{\mathrm{abs}})
++
+i\frac{\sin(\pi z\Omega_{\mathrm{abs}})}{\Omega_{\mathrm{abs}}}M_{\mathrm{abs}}
+\right]
+\begin{pmatrix}
+1\\
+0
+\end{pmatrix}.
+\]
+
+Since
+\[
+M_{\mathrm{abs}}
+\begin{pmatrix}
+1\\
+0
+\end{pmatrix}
+=
+\begin{pmatrix}
+s\\
+\gamma
+\end{pmatrix},
+\]
+the beam amplitudes are
+\[
+u_0(z)=\cos(\pi z\Omega_{\mathrm{abs}})
++i\frac{s}{\Omega_{\mathrm{abs}}}\sin(\pi z\Omega_{\mathrm{abs}}),
+\]
+\[
+u_{\mathbf g}(z)=
+i\frac{\gamma}{\Omega_{\mathrm{abs}}}\sin(\pi z\Omega_{\mathrm{abs}}).
+\]
+
+\subsection{Absorbing dynamical intensity}
+
+The diffracted intensity is
+\[
+I_{\mathrm{dyn,abs}}(z,s)\propto \abs{u_{\mathbf g}(z)}^2,
+\]
+so
+\[
+I_{\mathrm{dyn,abs}}(z,s)
+\propto
+\left|
+\frac{\gamma}{\Omega_{\mathrm{abs}}}
+\sin(\pi z\Omega_{\mathrm{abs}})
+\right|^2.
+\]
+
+Setting \(z=t\),
+\[
+I_{\mathrm{dyn,abs}}(t,s)
+\propto
+\left|
+\frac{\gamma}{\sqrt{s^2+\gamma^2}}
+\sin\!\left(\pi t\sqrt{s^2+\gamma^2}\right)
+\right|^2.
+\]
+Using \eqref{eq:sincdef}, we rewrite
+\[
+\sin\!\left(\pi t\sqrt{s^2+\gamma^2}\right)
+=
+\pi t\sqrt{s^2+\gamma^2}\,
+\operatorname{sinc}\!\left(t\sqrt{s^2+\gamma^2}\right).
+\]
+
+Therefore
+\[
+I_{\mathrm{dyn,abs}}(t,s)
+\propto
+\pi^2 t^2 |\gamma|^2
+\left|
+\operatorname{sinc}\!\left(t\sqrt{s^2+\gamma^2}\right)
+\right|^2.
+\]
+This is a simple nontrivial two-beam absorptive extension of the dynamical rocking curve. Unlike the uniform damping model, absorption now changes the rocking-curve shape itself, because the effective oscillation parameter \(\Omega_{\mathrm{abs}}\) is complex.
+
+\subsection{Comparison with the kinematical absorbing case}
+
+In the kinematical case, a simple phenomenological way to include absorption is through a damped thickness integral, for example
+\[
+u_{\mathbf g}^{(\mathrm{kin,abs})}(t,s)
+\propto
+\frac{1}{\xi}\int_0^t e^{2\pi i s z}e^{-\mu(t-z)}\,dz.
+\]
+
+Evaluating the integral gives
+\[
+u_{\mathbf g}^{(\mathrm{kin,abs})}(t,s)
+\propto
+\frac{1}{\xi}
+\frac{e^{2\pi i s t}-e^{-\mu t}}{2\pi i s+\mu},
+\]
+and hence
+\[
+I_{\mathrm{kin,abs}}(t,s)
+\propto
+\frac{\pi^2}{\xi^2}
+\left|
+\frac{e^{2\pi i s t}-e^{-\mu t}}{2\pi i s+\mu}
+\right|^2.
+\]
+
+Thus, in this next-simplest absorption treatment, the kinematical and dynamical cases are modified in fundamentally different ways:
+\begin{itemize}
+    \item in the kinematical case, absorption enters through the thickness integral,
+    \item in the dynamical case, absorption enters through a complex coupled-wave propagation constant.
+\end{itemize}
+
+This is why the absorptive modification is no longer just a common overall prefactor.
+
+\subsection{Final form}
+
+The absorbing simplified two-beam dynamical rocking curve is therefore
+\[
+I_{\mathrm{dyn,abs}}(t,s)
+\propto
+\left|
+\frac{\gamma}{\sqrt{s^2+\gamma^2}}
+\sin\!\left(\pi t\sqrt{s^2+\gamma^2}\right)
+\right|^2,
+\qquad
+\gamma=\frac{1}{\xi}+i\frac{1}{\xi'}.
+\]
+
+This reduces to the non-absorbing result when
+\[
+\frac{1}{\xi'}\to 0,
+\]
+since then \(\gamma \to 1/\xi\) and \(\Omega_{\mathrm{abs}}\to \sqrt{s^2+1/\xi^2}\).
+
+\section{Phenomenological identification of the absorption scales}
+
+The absorption parameters introduced in the kinematical and dynamical treatments are in general not identical at the level of the underlying derivation. In the kinematical model, absorption was represented by the damping coefficient \(\mu\), while in the dynamical model it was represented by the absorptive inverse length \(1/\xi'\) entering the complex coupling constant.
+
+For comparison purposes, however, it is convenient to relate the two through a phenomenological proportionality
+\[
+\frac{1}{\xi'} = C\mu,
+\]
+where \(C\) is a dimensionless model-dependent scale factor.
+It should not be interpreted as a universal constant that enforces one model to be always more or less absorption-sensitive than the other across all \(t,\xi,s,\mu\); that comparison depends on parameter regime.
+
+With this identification, both absorption parameters vanish simultaneously when
+\[
+\mu \to 0,
+\]
+so that both the kinematical and dynamical absorbing expressions reduce to their corresponding non-absorbing forms.
+
+\subsection{Kinematical case under this identification}
+
+The absorbing kinematical expression was
+\[
+I_{\mathrm{kin,abs}}(t,s)
+\propto
+\frac{\pi^2}{\xi^2}
+\left|
+\frac{e^{2\pi i s t}-e^{-\mu t}}{2\pi i s+\mu}
+\right|^2.
+\]
+In the limit $\mu \to 0$,
+
+\[
+I_{\mathrm{kin,abs}}(t,s)
+\to
+\frac{\pi^2}{\xi^2}
+\left|
+\frac{e^{2\pi i s t}-1}{2\pi i s}
+\right|^2.
+\]
+
+To recover the sinc form, rewrite the numerator as
+\[
+e^{2\pi i s t}-1
+=
+e^{\pi i s t}\left(e^{\pi i s t}-e^{-\pi i s t}\right)
+=
+2i\,e^{\pi i s t}\sin(\pi s t).
+\]
+
+Hence
+\[
+\frac{e^{2\pi i s t}-1}{2\pi i s}
+=
+e^{\pi i s t}\frac{\sin(\pi s t)}{\pi s}
+=
+t\,e^{\pi i s t}\frac{\sin(\pi s t)}{\pi s t}
+=
+t\,e^{\pi i s t}\operatorname{sinc}(st).
+\]
+
+Therefore
+\[
+\left|
+\frac{e^{2\pi i s t}-1}{2\pi i s}
+\right|^2
+=
+t^2 \operatorname{sinc}^2(st),
+\]
+since $|e^{\pi i s t}|^2=1$.
+
+Thus
+\[
+I_{\mathrm{kin,abs}}(t,s)
+\to
+\pi^2\left(\frac{t}{\xi}\right)^2\operatorname{sinc}^2(st),
+\]
+which is exactly the non-absorbing kinematical result.
+
+\subsection{Dynamical case under this identification}
+
+In the absorbing dynamical model, the complex coupling constant was defined as
+\[
+\gamma=\frac{1}{\xi}+i\frac{1}{\xi'}.
+\]
+
+Using
+\[
+\frac{1}{\xi'}=C\mu,
+\]
+this becomes
+\[
+\gamma=\frac{1}{\xi}+iC\mu.
+\]
+
+The absorbing dynamical rocking curve was
+\[
+I_{\mathrm{dyn,abs}}(t,s)
+\propto
+\left|
+\frac{\gamma}{\sqrt{s^2+\gamma^2}}
+\sin\!\left(\pi t\sqrt{s^2+\gamma^2}\right)
+\right|^2.
+\]
+
+Now let
+\[
+\mu \to 0.
+\]
+Then
+\[
+\gamma \to \frac{1}{\xi},
+\]
+and therefore
+\[
+\sqrt{s^2+\gamma^2}\to \sqrt{s^2+\frac{1}{\xi^2}}.
+\]
+
+Hence
+\[
+I_{\mathrm{dyn,abs}}(t,s)
+\to
+\left|
+\frac{1/\xi}{\sqrt{s^2+1/\xi^2}}
+\sin\!\left(\pi t\sqrt{s^2+\frac{1}{\xi^2}}\right)
+\right|^2.
+\]
+
+This is exactly the non-absorbing simplified two-beam dynamical result,
+\[
+I_{\mathrm{dyn}}(t,s)
+\propto
+\frac{1/\xi^2}{s^2+1/\xi^2}
+\sin^2\!\left(\pi t\sqrt{s^2+\frac{1}{\xi^2}}\right).
+\]
+Using \(w=\xi s\), the same baseline is
+\[
+I_{\mathrm{dyn}}(w)\propto
+\pi^2\left(\frac{t}{\xi}\right)^2
+\operatorname{sinc}^2\!\left(\frac{t}{\xi}\sqrt{1+w^2}\right),
+\]
+so the absorbing dynamical expression can be read as this sinc-based baseline multiplied by a \(\mu\)-dependent correction factor.
+
+\subsection{Interpretation}
+
+Thus, with the phenomenological identification
+\[
+\frac{1}{\xi'}=C\mu,
+\]
+both absorbing rocking-curve models recover their non-absorbing limits when
+\[
+\mu \to 0.
+\]
+
+This provides a convenient way to compare the kinematical and dynamical absorbing expressions using a common absorption scale, while still allowing the proportionality constant \(C\) to be adjusted later if desired.
+
+\subsection{Final forms with a common absorption parameter}
+
+Using
+\[
+\frac{1}{\xi'}=C\mu,
+\]
+the absorbing kinematical rocking curve is
+\[
+I_{\mathrm{kin,abs}}(t,s)
+\propto
+\frac{\pi^2}{\xi^2}
+\left|
+\frac{e^{2\pi i s t}-e^{-\mu t}}{2\pi i s+\mu}
+\right|^2,
+\]
+and the absorbing dynamical rocking curve is
+\[
+I_{\mathrm{dyn,abs}}(t,s)
+\propto
+\pi^2 t^2
+\left|\frac{1}{\xi}+iC\mu\right|^2
+\left|
+\operatorname{sinc}\!\left(
+t\sqrt{s^2+\left(\frac{1}{\xi}+iC\mu\right)^2}
+\right)
+\right|^2.
+\]
+Both expressions reduce to their corresponding non-absorbing forms in the limit
+\[
+\mu\to 0.
+\]
+In particular,
+\[
+I_{\mathrm{kin,abs}}(t,s)\to I_{\mathrm{kin}}(t,s)\propto
+\pi^2\left(\frac{t}{\xi}\right)^2\operatorname{sinc}^2(st)
+=
+\pi^2\left(\frac{t}{\xi}\right)^2\operatorname{sinc}^2\!\left(\frac{t}{\xi}w\right).
+\]
+
+\end{document}
