@@ -48,6 +48,7 @@ The purpose of this note is to derive:
     \item a simple absorptive extension of the dynamical rocking curve, and
     \item a phenomenological comparison of the absorption scales used in the kinematical and dynamical treatments.
 \end{enumerate}
+The practical motivation is fine-sliced and continuous-rotation 3D electron-diffraction rocking-curve modelling, where dynamical effects are central \cite{CleverleyBeanland2023_FineSliced3DED,KlarEtAl2023_Dynamical3DED}.
 
 \section{Background: two-beam wavefield and coupled equations}
 
@@ -57,6 +58,7 @@ If only the transmitted beam and one diffracted beam are retained, the crystal w
 +
 u_{\mathbf g}(z)e^{2\pi i (\mathbf k+\mathbf g)\cdot \mathbf r}.
 \]
+This standard two-beam dynamical framework and its coupled-wave formulation follow the Darwin--Howie--Whelan treatment \cite{MoodieCowleyGoodman_DynamicalED}.
 
 Here the exponential factors describe the fast oscillations, while the amplitudes \(u_0(z)\) and \(u_{\mathbf g}(z)\) vary with depth \(z\).
 
@@ -214,6 +216,7 @@ u_0\\
 u_{\mathbf g}
 \end{pmatrix}.
 \]
+The slowly varying envelope approximation and matrix form used here are standard in two-beam dynamical electron-diffraction theory \cite{MoodieCowleyGoodman_DynamicalED}.
 
 These same amplitudes \(u_0(z)\) and \(u_{\mathbf g}(z)\) are used in both the kinematical and dynamical treatments below. In the kinematical limit, one assumes \(u_0(z)\) remains approximately constant and derives a single thickness integral. The full derivation of that result is given in Section~\ref{sec:kinematical}. The kinematical and dynamical sections may be written in slightly different phase conventions; in the comparison below they are placed on a common normalized-sinc footing, and the local repair is only the overall prefactor consistency.
 
@@ -400,6 +403,7 @@ The formal solution is
 \[
 \mathbf{u}(z)=e^{i\pi zM}\mathbf{u}(0).
 \]
+This matrix-exponential solution step is the standard two-beam result in dynamical electron-diffraction treatments \cite{MoodieCowleyGoodman_DynamicalED}.
 
 So the problem reduces to evaluating the matrix exponential. We compute $M^2$
 \[
@@ -607,6 +611,7 @@ A simple way to obtain a nontrivial absorptive modification of the dynamical roc
 \frac{1}{\xi}+i\frac{1}{\xi'},
 \]
 where \(\xi'\) is an absorptive length scale.
+This substitution is used here as a simplified phenomenological model rather than the most general absorbing dynamical-diffraction formulation.
 
 With the same entrance condition \(u_0(0)=1\), \(u_{\mathbf g}(0)=0\), define
 \[
@@ -819,5 +824,8 @@ Both expressions reduce to their corresponding non-absorbing forms in the limit
 \[
 \mu\to 0.
 \]
+
+\bibliographystyle{unsrt}
+\bibliography{rocking_curve_refs}
 
 \end{document}
