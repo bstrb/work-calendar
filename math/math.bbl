@@ -5,12 +5,16 @@ A.~Cleverley and R.~Beanland.
 \newblock Modelling fine-sliced three dimensional electron diffraction data
   with dynamical bloch-wave simulations.
 \newblock {\em IUCrJ}, 10:118--130, 2023.
+\newblock \href {https://doi.org/10.1107/S2052252522011290}
+  {\path{doi:10.1107/S2052252522011290}}.
 
 \bibitem{KlarEtAl2023_Dynamical3DED}
 P.~B. Klar, Y.~Krysiak, H.~Xu, et~al.
 \newblock Accurate structure models and absolute configuration determination
   using dynamical effects in continuous-rotation 3d electron diffraction data.
 \newblock {\em Nature Chemistry}, 15:848--855, 2023.
+\newblock \href {https://doi.org/10.1038/s41557-023-01186-1}
+  {\path{doi:10.1038/s41557-023-01186-1}}.
 
 \bibitem{MoodieCowleyGoodman_DynamicalED}
 A.~F. Moodie, J.~M. Cowley, and P.~Goodman.
@@ -18,5 +22,8 @@ A.~F. Moodie, J.~M. Cowley, and P.~Goodman.
 \newblock In {\em International Tables for Crystallography}, chapter 5.2.
   International Union of Crystallography, 2010.
 \newblock Accessed 2026-04-09.
+\newblock URL: \url{https://it.iucr.org/Bb/ch5o2v0001/}, \href
+  {https://doi.org/10.1107/97809553602060000780}
+  {\path{doi:10.1107/97809553602060000780}}.
 
 \end{thebibliography}

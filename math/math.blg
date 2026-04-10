@@ -1,46 +1,51 @@
 This is BibTeX, Version 0.99d (TeX Live 2023/Debian)
 Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: math.aux
-The style file: unsrt.bst
+The style file: unsrturl.bst
+Reallocated glb_str_ptr (elt_size=4) to 20 items from 10.
+Reallocated global_strs (elt_size=200001) to 20 items from 10.
+Reallocated glb_str_end (elt_size=4) to 20 items from 10.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
 Database file #1: rocking_curve_refs.bib
 You've used 3 entries,
-            1791 wiz_defined-function locations,
-            469 strings with 4270 characters,
-and the built_in function-call counts, 745 in all, are:
-= -- 68
-> -- 33
+            2616 wiz_defined-function locations,
+            609 strings with 5466 characters,
+and the built_in function-call counts, 1290 in all, are:
+= -- 141
+> -- 38
 < -- 1
 + -- 12
 - -- 9
-* -- 51
-:= -- 126
-add.period$ -- 11
+* -- 76
+:= -- 193
+add.period$ -- 14
 call.type$ -- 3
 change.case$ -- 3
 chr.to.int$ -- 0
 cite$ -- 3
-duplicate$ -- 32
-empty$ -- 73
+duplicate$ -- 34
+empty$ -- 134
 format.name$ -- 9
-if$ -- 162
+if$ -- 348
 int.to.chr$ -- 0
 int.to.str$ -- 3
 missing$ -- 3
-newline$ -- 19
+newline$ -- 22
 num.names$ -- 3
-pop$ -- 7
+pop$ -- 23
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 9
+skip$ -- 88
 stack$ -- 0
-substring$ -- 50
-swap$ -- 4
-text.length$ -- 1
+substring$ -- 56
+swap$ -- 10
+text.length$ -- 7
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
 warning$ -- 0
 while$ -- 7
 width$ -- 4
-write$ -- 38
+write$ -- 45
