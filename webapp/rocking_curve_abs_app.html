@@ -165,6 +165,13 @@
       font-size: 0.95rem;
     }
 
+    .derived-readout {
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 0.84rem;
+      line-height: 1.35;
+    }
+
     .checkboxes {
       display: grid;
       gap: 8px;
@@ -274,33 +281,20 @@
         Compare kinematical and two-beam dynamical rocking curves as a function of the
         excitation error <em>s</em>, with the internal coordinate <em>w = ξs</em> evaluated
         using a variable extinction distance, and interactive control over crystal thickness,
-        excitation-error range, and extinction distance.
+        excitation-error range, extinction distance, dimensionless absorption strength
+        <em>α = ξ/ξ'</em>, and an optional thickness-accumulated damping length
+        <em>Λ<sub>abs</sub></em>.
       </div>
     </div>
 
     <div class="layout">
       <aside class="panel controls">
-        <div class="note">
-          <strong>Physical note.</strong>
-          <!-- The excitation error is <code>s</code>, with exact Bragg at <code>s = 0</code>. -->
-          The horizontal axis is plotted directly in <code>s</code>, while the formulas use <code>w = ξs</code> internally.
-          <!-- Here <code>s</code> is labeled in
-          <code>Å<sup>-1</sup></code>, while thickness <code>t</code> and extinction distance
-          <code>ξ</code> are entered in nm. -->
-          <!-- The ratio <code>t/ξ</code> is therefore evaluated in
-          nm, and <code>ξ</code> is converted to Å only when forming <code>w = ξs</code>. -->
-          <!-- The <code>s</code> slider sets the symmetric plotted half-range <code>|s|</code>, and the
-          <code>ξ</code> slider changes the extinction distance. -->
-          Increasing crystal thickness
-          <code>t</code> produces more closely spaced thickness fringes and narrows the central
-          feature around the Bragg condition.
-        </div>
 
         <div class="control-group">
           <label for="thickness">Crystal thickness t (nm)</label>
           <div class="row">
             <div class="range-wrap">
-              <input id="thickness" type="range" min="1" max="200" step="1" value="100">
+              <input id="thickness" type="range" min="10" max="200" step="10" value="100">
             </div>
             <div id="thicknessValue" class="value-box">100</div>
           </div>
@@ -317,27 +311,33 @@
         </div>
 
         <div class="control-group">
-          <label for="mu">Overall absorption strength μ (1/nm, log scale)</label>
+          <label for="alpha">Absorption strength α = ξ/ξ' (dimensionless)</label>
           <div class="row">
             <div class="range-wrap">
-              <input id="mu" type="range" min="-8" max="-7" step="0.1" value="-8">
+              <input id="alpha" type="range" min="0" max="1" step="0.01" value="0">
             </div>
-            <div id="muReadout" class="value-box">1.00e-08</div>
+            <div id="alphaReadout" class="value-box">0</div>
           </div>
+          <div id="alphaDerived" class="derived-readout">Derived ξ' = 200 nm; ξ'/ξ = 1</div>
         </div>
 
         <div class="control-group">
-          <label for="cScale">Dynamical absorption scaling C (log scale)</label>
-          <div class="row">
-            <div class="range-wrap">
-              <input id="cScale" type="range" min="4" max="5" step="0.1" value="4">
-            </div>
-            <div id="cScaleReadout" class="value-box">1.00e+04</div>
-          </div>
+          <button id="toggleAbsorption" class="toggle-button" type="button">Disable α coupling absorption</button>
         </div>
 
         <div class="control-group">
-          <button id="toggleAbsorption" class="toggle-button" type="button">Disable μ and C sliders (μ = 0)</button>
+          <label for="lambdaAbs">Thickness-damping length Λ<sub>abs</sub> (nm, log scale)</label>
+          <div class="row">
+            <div class="range-wrap">
+              <input id="lambdaAbs" type="range" min="0" max="5" step="0.1" value="3">
+            </div>
+            <div id="lambdaAbsReadout" class="value-box">∞</div>
+          </div>
+          <div id="lambdaAbsDerived" class="derived-readout">Current base-thickness factor exp(-t/Λ_abs) = 1</div>
+        </div>
+
+        <div class="control-group">
+          <button id="toggleThicknessDamping" class="toggle-button" type="button">Enable thickness damping</button>
         </div>
 
         <div class="control-group">
@@ -380,6 +380,28 @@
           </div>
         </div>
 
+        <div class="note">
+          <strong>Physical note.</strong>
+          <!-- The excitation error is <code>s</code>, with exact Bragg at <code>s = 0</code>. -->
+          The horizontal axis is plotted directly in <code>s</code>, while the formulas use <code>w = ξs</code> internally.
+          Absorption is controlled by the dimensionless strength <code>α = ξ/ξ'</code>, so
+          <code>γ<sub>phys</sub> = (1/ξ)(1 + iα)</code> and the normalized internal variable is
+          <code>γ̃ = ξγ<sub>phys</sub> = 1 + iα</code>.
+          The special case <code>α = 0</code> means no absorption and therefore <code>ξ' = ∞</code>.
+          An additional phenomenological thickness-damping length <code>Λ<sub>abs</sub></code> may
+          be applied through the multiplicative factor <code>exp(-t/Λ<sub>abs</sub>)</code>, which
+          attenuates both curves without changing their <code>w</code>-dependent shape.
+          <!-- Here <code>s</code> is labeled in
+          <code>Å<sup>-1</sup></code>, while thickness <code>t</code> and extinction distance
+          <code>ξ</code> are entered in nm. -->
+          <!-- The ratio <code>t/ξ</code> is therefore evaluated in
+          nm, and <code>ξ</code> is converted to Å only when forming <code>w = ξs</code>. -->
+          <!-- The <code>s</code> slider sets the symmetric plotted half-range <code>|s|</code>, and the
+          <code>ξ</code> slider changes the extinction distance. -->
+          Increasing crystal thickness
+          <code>t</code> produces more closely spaced thickness fringes and narrows the central
+          feature around the Bragg condition.
+        </div>
       </aside>
 
       <section class="panel plot-panel">
@@ -405,9 +427,10 @@
       thickness: document.getElementById("thickness"),
       sAbsMax: document.getElementById("sAbsMax"),
       xi: document.getElementById("xi"),
-      mu: document.getElementById("mu"),
-      cScale: document.getElementById("cScale"),
+      alpha: document.getElementById("alpha"),
       toggleAbsorption: document.getElementById("toggleAbsorption"),
+      lambdaAbs: document.getElementById("lambdaAbs"),
+      toggleThicknessDamping: document.getElementById("toggleThicknessDamping"),
       showKinematical: document.getElementById("showKinematical"),
       showDynamical: document.getElementById("showDynamical"),
       enableOverlay: document.getElementById("enableOverlay"),
@@ -419,8 +442,10 @@
       thickness: document.getElementById("thicknessValue"),
       sAbsMax: document.getElementById("sAbsMaxReadout"),
       xi: document.getElementById("xiReadout"),
-      mu: document.getElementById("muReadout"),
-      cScale: document.getElementById("cScaleReadout"),
+      alpha: document.getElementById("alphaReadout"),
+      alphaDerived: document.getElementById("alphaDerived"),
+      lambdaAbs: document.getElementById("lambdaAbsReadout"),
+      lambdaAbsDerived: document.getElementById("lambdaAbsDerived"),
       intensityOffset: document.getElementById("intensityOffsetReadout"),
     };
 
@@ -438,33 +463,77 @@
 
     const palette = ["#8c3b1e", "#226f63", "#5d4ea1", "#bd7a18", "#3869b1", "#9b3059"];
     let isAbsorptionDisabled = false;
+    let isThicknessDampingDisabled = true;
 
-    function fromLogSlider(control) {
-      return 10 ** Number(control.value);
+    function trimTrailingZeros(text) {
+      return text.replace(/(\.\d*?)0+$/, "$1").replace(/\.$/, "");
     }
 
-    function formatLogValue(value) {
-      return value.toExponential(2).replace("e+", "e");
+    function formatDisplayValue(value) {
+      if (!Number.isFinite(value)) {
+        return "∞";
+      }
+      const magnitude = Math.abs(value);
+      if (magnitude !== 0 && (magnitude >= 1e4 || magnitude < 1e-2)) {
+        return value.toExponential(2).replace("e+", "e");
+      }
+      if (magnitude >= 100) {
+        return trimTrailingZeros(value.toFixed(1));
+      }
+      if (magnitude >= 10) {
+        return trimTrailingZeros(value.toFixed(2));
+      }
+      return trimTrailingZeros(value.toFixed(3));
     }
 
-    function getEffectiveMu() {
-      return isAbsorptionDisabled ? 0 : fromLogSlider(controls.mu);
+    function formatAlphaValue(value) {
+      return trimTrailingZeros(value.toFixed(2));
+    }
+
+    function getEffectiveAlpha() {
+      return isAbsorptionDisabled ? 0 : Number(controls.alpha.value);
+    }
+
+    function getEffectiveLambdaAbs() {
+      return isThicknessDampingDisabled ? Infinity : 10 ** Number(controls.lambdaAbs.value);
+    }
+
+    function thicknessDampingFactor(t, lambdaAbs) {
+      return Number.isFinite(lambdaAbs) ? Math.exp(-t / lambdaAbs) : 1;
     }
 
     function updateAbsorptionToggleState() {
-      controls.mu.disabled = isAbsorptionDisabled;
-      controls.cScale.disabled = isAbsorptionDisabled;
+      controls.alpha.disabled = isAbsorptionDisabled;
       controls.toggleAbsorption.textContent = isAbsorptionDisabled
-        ? "Enable μ and C sliders"
-        : "Disable μ and C sliders (μ = 0)";
+        ? "Enable α slider"
+        : "Disable α coupling absorption";
+    }
+
+    function updateThicknessDampingToggleState() {
+      controls.lambdaAbs.disabled = isThicknessDampingDisabled;
+      controls.toggleThicknessDamping.textContent = isThicknessDampingDisabled
+        ? "Enable thickness damping"
+        : "Disable thickness damping";
     }
 
     function updateReadouts() {
+      const alpha = getEffectiveAlpha();
+      const xiNm = Number(controls.xi.value);
+      const tNm = Number(controls.thickness.value);
+      const xiPrimeNm = alpha === 0 ? Infinity : xiNm / alpha;
+      const xiPrimeOverXi = alpha === 0 ? Infinity : 1 / alpha;
+      const lambdaAbsNm = getEffectiveLambdaAbs();
+      const baseDampingFactor = thicknessDampingFactor(tNm, lambdaAbsNm);
+
       readouts.thickness.textContent = Number(controls.thickness.value).toFixed(0);
       readouts.sAbsMax.textContent = `±${Number(controls.sAbsMax.value).toFixed(3)}`;
       readouts.xi.textContent = Number(controls.xi.value).toFixed(0);
-      readouts.mu.textContent = formatLogValue(getEffectiveMu());
-      readouts.cScale.textContent = formatLogValue(fromLogSlider(controls.cScale));
+      readouts.alpha.textContent = formatAlphaValue(alpha);
+      readouts.alphaDerived.textContent = alpha === 0
+        ? "Derived ξ' = ∞; ξ'/ξ = ∞"
+        : `Derived ξ' = ${formatDisplayValue(xiPrimeNm)} nm; ξ'/ξ = ${formatDisplayValue(xiPrimeOverXi)}`;
+      readouts.lambdaAbs.textContent = Number.isFinite(lambdaAbsNm) ? formatDisplayValue(lambdaAbsNm) : "∞";
+      readouts.lambdaAbsDerived.textContent = `Current base-thickness factor exp(-t/Λ_abs) = ${formatDisplayValue(baseDampingFactor)}`;
       readouts.intensityOffset.textContent = `${Number(controls.intensityOffset.value).toFixed(2)}x`;
     }
 
@@ -561,34 +630,18 @@
       return z.re * z.re + z.im * z.im;
     }
 
-    // Absorbing rocking-curve formulas; when mu = 0 they return the original non-absorbing forms.
-    function intensityKinematicalAbsorbing(w, t, xi, mu) {
-      // Keep exact fallback only at mu = 0 to avoid switch-like behavior near tiny mu.
-      if (mu === 0) {
-        return intensityKinematical(w, t, xi);
-      }
+    function intensityKinematicalAbsorbing(w, t, xi, alpha) {
       const tOverXi = t / xi;
-      const u = tOverXi * w;
-      const muXi = mu * xi;
-      const muT = muXi * tOverXi;
-      const phase = 2 * Math.PI * u;
-      const decay = Math.exp(-muT);
-      const numeratorAbsSq = (Math.cos(phase) - decay) ** 2 + Math.sin(phase) ** 2;
-      const denominatorAbsSq = muT ** 2 + (2 * Math.PI * u) ** 2;
-      return (Math.PI ** 2) * (tOverXi ** 2) * (numeratorAbsSq / denominatorAbsSq);
+      const gammaTildeAbsSq = 1 + alpha * alpha;
+      return (Math.PI ** 2) * (tOverXi ** 2) * gammaTildeAbsSq * sinc(tOverXi * w) ** 2;
     }
 
-    function intensityDynamicalAbsorbing(w, t, xi, mu, cScale) {
-      // Keep exact fallback only at mu = 0 to avoid switch-like behavior near tiny mu.
-      if (mu === 0) {
-        return intensityDynamical(w, t, xi);
-      }
+    function intensityDynamicalAbsorbing(w, t, xi, alpha) {
       const tOverXi = t / xi;
-      const muXi = mu * xi;
-      const gamma = complex(1, cScale * muXi);
-      const root = complexSqrt(complexAdd(complex(w * w, 0), complexMultiply(gamma, gamma)));
+      const gammaTilde = complex(1, alpha);
+      const root = complexSqrt(complexAdd(complex(w * w, 0), complexMultiply(gammaTilde, gammaTilde)));
       const amplitude = complexMultiply(
-        complexDivide(gamma, root),
+        complexDivide(gammaTilde, root),
         complexSin(complexScale(root, Math.PI * tOverXi))
       );
       return complexAbsSquared(amplitude);
@@ -749,8 +802,10 @@
       const tNm = Number(controls.thickness.value);
       const sAbsMax = Number(controls.sAbsMax.value);
       const xiNm = Number(controls.xi.value);
-      const mu = getEffectiveMu();
-      const cScale = fromLogSlider(controls.cScale);
+      const alpha = getEffectiveAlpha();
+      const lambdaAbsNm = getEffectiveLambdaAbs();
+      const xiPrimeNm = alpha === 0 ? Infinity : xiNm / alpha;
+      const xiPrimeOverXi = alpha === 0 ? Infinity : 1 / alpha;
       const xiA = ANGSTROMS_PER_NM * xiNm;
       const nPoints = POINT_COUNT;
       const showKinematical = controls.showKinematical.checked;
@@ -771,11 +826,11 @@
       if (!Number.isFinite(xiNm) || xiNm <= 0) {
         throw new Error("Extinction distance ξ must be positive.");
       }
-      if (!Number.isFinite(mu) || mu < 0) {
-        throw new Error("Absorption strength μ must be non-negative.");
+      if (!Number.isFinite(alpha) || alpha < 0) {
+        throw new Error("Absorption strength α must be non-negative.");
       }
-      if (!Number.isFinite(cScale) || cScale < 0) {
-        throw new Error("Dynamical scaling C must be non-negative.");
+      if (!(Number.isFinite(lambdaAbsNm) && lambdaAbsNm > 0) && lambdaAbsNm !== Infinity) {
+        throw new Error("Thickness-damping length Λ_abs must be positive.");
       }
       if (!showKinematical && !showDynamical) {
         throw new Error("Enable at least one model to display curves.");
@@ -791,6 +846,7 @@
 
       thicknessValues.forEach((thicknessNm, index) => {
         const color = palette[index % palette.length];
+        const dampingFactor = thicknessDampingFactor(thicknessNm, lambdaAbsNm);
 
         if (showKinematical) {
           rawSeries.push({
@@ -800,7 +856,7 @@
             thicknessIndex: index,
             points: sValues.map(s => {
               const w = xiA * s;
-              return { x: s, y: intensityKinematicalAbsorbing(w, thicknessNm, xiNm, mu) };
+              return { x: s, y: dampingFactor * intensityKinematicalAbsorbing(w, thicknessNm, xiNm, alpha) };
             })
           });
         }
@@ -813,7 +869,7 @@
             thicknessIndex: index,
             points: sValues.map(s => {
               const w = xiA * s;
-              return { x: s, y: intensityDynamicalAbsorbing(w, thicknessNm, xiNm, mu, cScale) };
+              return { x: s, y: dampingFactor * intensityDynamicalAbsorbing(w, thicknessNm, xiNm, alpha) };
             })
           });
         }
@@ -831,7 +887,7 @@
         };
       });
 
-      return { series, sMin, sMax, sAbsMax, xiNm, xiA, thicknessValues, offsetStep, offsetScale, mu, cScale };
+      return { series, sMin, sMax, sAbsMax, xiNm, xiA, alpha, xiPrimeNm, xiPrimeOverXi, lambdaAbsNm, thicknessValues, offsetStep, offsetScale };
     }
 
     function renderPlot() {
@@ -839,7 +895,7 @@
       status.textContent = "";
 
       try {
-        const { series, sMin, sMax, sAbsMax, xiNm, xiA, thicknessValues, offsetStep, offsetScale, mu, cScale } = buildSeries();
+        const { series, sMin, sMax, sAbsMax, xiNm, xiA, alpha, xiPrimeNm, xiPrimeOverXi, lambdaAbsNm, thicknessValues, offsetStep, offsetScale } = buildSeries();
         const yMax = Math.max(...series.flatMap(item => item.points.map(point => point.y)));
         const yMin = 0;
         const paddedYMax = yMax > 0 ? yMax * 1.08 : 1;
@@ -863,7 +919,13 @@
         }
 
         const tSummary = thicknessValues.map(value => value.toFixed(0)).join(", ");
-        status.textContent = `Plotted s range: -${sAbsMax.toFixed(3)} to ${sAbsMax.toFixed(3)} Å^-1; ξ = ${xiNm.toFixed(1)} nm; corresponding w range: ${(-xiA * sAbsMax).toFixed(2)} to ${(xiA * sAbsMax).toFixed(2)}; μ = ${formatLogValue(mu)} 1/nm; C = ${formatLogValue(cScale)}; t values (nm): ${tSummary}; intensity offset step: ${(offsetScale).toFixed(2)}x peak (${offsetStep.toExponential(2)})`;
+        const derivedSummary = alpha === 0
+          ? "ξ' = ∞; ξ'/ξ = ∞"
+          : `ξ' = ${formatDisplayValue(xiPrimeNm)} nm; ξ'/ξ = ${formatDisplayValue(xiPrimeOverXi)}`;
+        const lambdaSummary = Number.isFinite(lambdaAbsNm)
+          ? `Λ_abs = ${formatDisplayValue(lambdaAbsNm)} nm; base exp(-t/Λ_abs) = ${formatDisplayValue(thicknessDampingFactor(Number(controls.thickness.value), lambdaAbsNm))}`
+          : "Λ_abs = ∞; exp(-t/Λ_abs) = 1";
+        status.textContent = `Plotted s range: -${sAbsMax.toFixed(3)} to ${sAbsMax.toFixed(3)} Å^-1; ξ = ${xiNm.toFixed(1)} nm; corresponding w range: ${(-xiA * sAbsMax).toFixed(2)} to ${(xiA * sAbsMax).toFixed(2)}; α = ${formatAlphaValue(alpha)} (${derivedSummary}); ${lambdaSummary}; internal code variables use w = ξs, normalized γ̃ = 1 + iα, and a multiplicative thickness factor exp(-t/Λ_abs); t values (nm): ${tSummary}; intensity offset step: ${(offsetScale).toFixed(2)}x peak (${offsetStep.toExponential(2)})`;
         renderLegend(series);
       } catch (error) {
         status.textContent = error.message;
@@ -875,8 +937,8 @@
       controls.thickness,
       controls.sAbsMax,
       controls.xi,
-      controls.mu,
-      controls.cScale,
+      controls.alpha,
+      controls.lambdaAbs,
       controls.showKinematical,
       controls.showDynamical,
       controls.enableOverlay,
@@ -893,7 +955,14 @@
       renderPlot();
     });
 
+    controls.toggleThicknessDamping.addEventListener("click", () => {
+      isThicknessDampingDisabled = !isThicknessDampingDisabled;
+      updateThicknessDampingToggleState();
+      renderPlot();
+    });
+
     updateAbsorptionToggleState();
+    updateThicknessDampingToggleState();
     renderPlot();
   </script>
 </body>

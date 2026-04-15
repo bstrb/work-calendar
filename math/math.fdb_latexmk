@@ -1,14 +1,15 @@
 # Fdb version 4
-["bibtex math"] 1775823082.75443 "math.aux" "math.bbl" "math" 1775823083.35631 0
-  "./rocking_curve_refs.bib" 1775746603.96807 1199 14960e09f04527d59f22975d5bcc18e3 ""
+["bibtex math"] 1776081526.96373 "math.aux" "math.bbl" "math" 1776081527.53196 0
+  "./rocking_curve_refs.bib" 1776081446.26766 1199 14960e09f04527d59f22975d5bcc18e3 ""
   "/usr/share/texlive/texmf-dist/bibtex/bst/urlbst/unsrturl.bst" 1675116457 30912 2cfc330ae0a68bbf7dc64e1666bbb15c ""
-  "math.aux" 1775823083.16589 3499 97cdbabc5b2042b12d7e592f46483e98 "pdflatex"
+  "math.aux" 1776081527.35745 3945 5eae5643e6f6d332a793b04dfeec7c13 "pdflatex"
   (generated)
   "math.bbl"
   "math.blg"
   (rewritten before read)
-["pdflatex"] 1775823082.82414 "math.tex" "math.pdf" "math" 1775823083.3564 0
+["pdflatex"] 1776081527.0384 "/home/bubl3932/files/work-calendar/math_v3/math.tex" "math.pdf" "math" 1776081527.53207 0
   "/etc/texmf/web2c/texmf.cnf" 1734439111.25353 475 c0e671620eb5563b2130f56340a5fde8 ""
+  "/home/bubl3932/files/work-calendar/math_v3/math.tex" 1776081526.17532 27791 1a4d733643bd0e41e88b000c2ec93f0f ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/tcrm1095.tfm" 1136768653 1536 02c06700a42be0f5a28664c7273f82e7 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmbsy5.tfm" 1246382020 1120 1e8878807317373affa7f7bba4cf2f6a ""
@@ -55,6 +56,7 @@
   "/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb" 1248133631 35469 70d41d2b9ea31d5d813066df7c99281c ""
   "/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb" 1248133631 35752 024fb6c41858982481f6968b5fc26508 ""
   "/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb" 1248133631 32362 179c33bbf43f19adbb3825bb4e36e57a ""
+  "/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb" 1248133631 32734 69e00a6b65cedb993666e42eedb3d48f ""
   "/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb" 1248133631 32726 0a1aea6fcd6468ee2cf64d891f5c43c8 ""
   "/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb" 1248133631 32569 5e5ddc8df908dea60932f3c484a54c0d ""
   "/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb" 1248133631 32626 4f5c1b83753b1dd3a97d1b399a005b4b ""
@@ -124,10 +126,10 @@
   "/usr/share/texmf/web2c/texmf.cnf" 1707919699 40399 f2c302f7d2af602abb742093540a5834 ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1734439121.82898 5472669 54eaf61a88b6b7896ebd0dac973cb29c ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1734439155 8213758 14ee3c3b925c9e10e15e5b544347d467 ""
-  "math.aux" 1775823083.16589 3499 97cdbabc5b2042b12d7e592f46483e98 "pdflatex"
-  "math.bbl" 1775823082.80876 1227 1ad90f939abd3c912239fc61fb7c4b51 "bibtex math"
-  "math.out" 1775823083.16589 4435 a08ff6d4bdeb7ea8dbddb45627fbcde4 "pdflatex"
-  "math.tex" 1775823073.95581 21564 3d3647ab27d6d9f484cb2ab9245fab0d ""
+  "math.aux" 1776081527.35745 3945 5eae5643e6f6d332a793b04dfeec7c13 "pdflatex"
+  "math.bbl" 1776081527.02645 1213 bbb8c9f918b863e1dcfe39ea4b4f7e7d "bibtex math"
+  "math.out" 1776081527.35745 4845 e37a6cb67c503aeb4130f6993a5de5e4 "pdflatex"
+  "math.tex" 1776081526.17532 27791 1a4d733643bd0e41e88b000c2ec93f0f ""
   (generated)
   "math.aux"
   "math.log"
