@@ -603,20 +603,12 @@ u_{\mathbf g}(z)=i\frac{1/\xi}{\Omega}\sin(\pi z\Omega).
 
 The diffracted intensity is
 \[
-I_{\mathrm{dyn}}(z,s)\propto \abs{u_{\mathbf g}(z)}^2,
-\]
-so
-\[
-I_{\mathrm{dyn}}(z,s)
-\propto
+I_{\mathrm{dyn}}(z,s)\propto \abs{u_{\mathbf g}(z)}^2
+=
 \frac{1/\xi^2}{\Omega^2}\sin^2(\pi z\Omega).
 \]
 
-Using
-\[
-\Omega^2=s^2+\frac{1}{\xi^2},
-\]
-and then setting \(z=t\), we obtain
+Setting \(z=t\) and using \(\Omega^2=s^2+1/\xi^2\), we obtain
 \[
 I_{\mathrm{dyn}}(t,s)
 \propto
@@ -636,57 +628,22 @@ I_{\mathrm{dyn}}(t,s)
 1+(\xi s)^2
 }.
 \]
-Let
-\[
-x=\frac{t}{\xi}\sqrt{1+(\xi s)^2}.
-\]
-Then using \eqref{eq:sincdef}
-\[
-\sin^2\!\left[
-\left(\frac{\pi t}{\xi}\right)\sqrt{1+(\xi s)^2}
-\right]
-=
-\sin^2(\pi x)
-=
-(\pi x)^2 \operatorname{sinc}^2(x).
-\]
-Therefore substituting back
+
+Using \eqref{eq:sincdef} with
 \[
 x=\frac{t}{\xi}\sqrt{1+(\xi s)^2},
 \]
+so that \(\sin^2(\pi x)=(\pi x)^2\operatorname{sinc}^2(x)\), this becomes
 \[
 I_{\mathrm{dyn}}(t,s)
 \propto
-\frac{
-\pi^2
-\left(\frac{t}{\xi}\right)^2
-\left(1+(\xi s)^2\right)
-\operatorname{sinc}^2\!\left[
-\frac{t}{\xi}\sqrt{1+(\xi s)^2}
-\right]
-}{
-1+(\xi s)^2
-}.
-\]
-Let
-\[
-w=\xi s.
-\]
-
-Then
-
-\[
-\sin^2\!\left[
-\left(\frac{\pi t}{\xi}\right)\sqrt{1+w^2}
-\right]
-=
-\pi^2\left(\frac{t}{\xi}\right)^2(1+w^2)
+\pi^2\left(\frac{t}{\xi}\right)^2
 \operatorname{sinc}^2\!\left(
-\frac{t}{\xi}\sqrt{1+w^2}
+\frac{t}{\xi}\sqrt{1+(\xi s)^2}
 \right).
 \]
 
-Therefore,
+With $w=\xi s$, this becomes 
 \[
 I_{\mathrm{dyn}}(w)
 \propto
@@ -734,7 +691,7 @@ since \(\operatorname{sinc}^2\) is even. The condition of fixed \(s\) matters be
 
 \section{A simple nontrivial absorption model}
 
-A simple way to obtain a nontrivial absorptive modification of the dynamical rocking curve is to allow the off-diagonal two-beam coupling to become complex:
+A simple way to obtain a nontrivial absorptive modification of the rocking curves is to allow the off-diagonal two-beam coupling to become complex:
 \[
 \gamma=
 \frac{1}{\xi}+i\frac{1}{\xi'},
@@ -751,7 +708,7 @@ With the same entrance condition \(u_0(0)=1\), \(u_{\mathbf g}(0)=0\), define
 \[
 \Omega_{\mathrm{abs}}=\sqrt{s^2+\gamma^2}.
 \]
-Then, by direct analogy with the non-absorbing two-beam result,
+Then, by direct analogy with the non-absorbing two-beam result, or equivalently by the replacement \(1/\xi \mapsto \gamma\),
 \[
 u_0(z)=\cos(\pi z\Omega_{\mathrm{abs}})
 +i\frac{s}{\Omega_{\mathrm{abs}}}\sin(\pi z\Omega_{\mathrm{abs}}),
@@ -790,7 +747,7 @@ I_{\mathrm{dyn,abs}}(t,s)
 \]
 Because \(\gamma\) is complex, \(\Omega_{\mathrm{abs}}\) is generally complex as well, so absorption changes the rocking-curve shape itself, not only its overall scale.
 
-\subsection{The kinematical absorbing case}
+\subsection{Kinematical limit}
 
 To take the kinematical limit of the same absorptive two-beam model, first write the \(\gamma\)-based equations in the raw phase convention corresponding to Eqs.~\eqref{eq:rawpsi0} and \eqref{eq:rawpsig}:
 \[
@@ -803,30 +760,7 @@ Now make the undepleted-beam approximation \(\psi_0(z)\approx 1\). Then
 \frac{d \psi_{\mathbf g}}{dz}+i\,2\pi s\,\psi_{\mathbf g}= i\pi \gamma.
 \]
 
-Using the integrating factor \(e^{i\,2\pi s z}\), one obtains
-\[
-\frac{d}{dz}\left(\psi_{\mathbf g}(z)e^{i\,2\pi s z}\right)
-=
-i\pi \gamma\,e^{i\,2\pi s z}.
-\]
-Integrating from \(z=0\) to \(z=t\), with \(\psi_{\mathbf g}(0)=0\), gives
-\[
-\psi_{\mathbf g}^{(\mathrm{kin,abs})}(t,s)
-=
-i\pi \gamma\,e^{-i\,2\pi s t}\int_0^t e^{i\,2\pi s z}\,dz
-=
-i\pi \gamma\,\frac{1-e^{-i\,2\pi s t}}{i\,2\pi s}.
-\]
-
-Rewrite the numerator as
-\[
-1-e^{-i\,2\pi s t}
-=
-e^{-i\pi s t}\left(e^{i\pi s t}-e^{-i\pi s t}\right)
-=
-2i\,e^{-i\pi s t}\sin(\pi s t).
-\]
-Therefore
+Repeating the integrating-factor calculation from Sec.~\ref{sec:kinematical}, now with \(1/\xi\) replaced by \(\gamma\), gives
 \[
 \psi_{\mathbf g}^{(\mathrm{kin,abs})}(t,s)
 =
@@ -850,63 +784,17 @@ I_{\mathrm{kin,abs}}(t,s)
 \]
 Because \(\gamma\) enters as a constant source coefficient in this kinematical limit, it modifies the overall scale but not the \(\operatorname{sinc}^2(st)\) line shape.
 
-\subsection{Final forms}
+\subsection{Common complex coupling and final forms}
 
-The absorbing simplified two-beam dynamical rocking curve is
-\[
-I_{\mathrm{dyn,abs}}(t,s)
-\propto
-\pi^2 t^2 |\gamma|^2
-\left|
-\operatorname{sinc}\!\left(t\sqrt{s^2+\gamma^2}\right)
-\right|^2,
-\qquad
-\gamma=\frac{1}{\xi}+i\frac{1}{\xi'}.
-\]
-
-This reduces to the non-absorbing dynamical result when
-\[
-\frac{1}{\xi'}\to 0,
-\]
-since then \(\gamma \to 1/\xi\).
-
-The absorbing kinematical expression was
-\[
-I_{\mathrm{kin,abs}}(t,s)
-\propto
-\pi^2 t^2 |\gamma|^2 \operatorname{sinc}^2(st),
-\qquad
-\gamma=\frac{1}{\xi}+i\frac{1}{\xi'}.
-\]
-In the limit \(1/\xi' \to 0\),
-\[
-I_{\mathrm{kin,abs}}(t,s)
-\to
-\pi^2\left(\frac{t}{\xi}\right)^2\operatorname{sinc}^2(st),
-\]
-which is exactly the non-absorbing kinematical result.
-
-\section{Using a common complex coupling}
-
-The absorbing kinematical and dynamical formulas are now both written in terms of the same complex coupling
+The absorbing kinematical and dynamical formulas are therefore both written in terms of the same complex coupling
 \[
 \gamma=\frac{1}{\xi}+i\frac{1}{\xi'}.
 \]
-However, \(\gamma\) enters the two models in different ways: in the kinematical limit it multiplies the source term and therefore only rescales the \(\operatorname{sinc}^2(st)\) profile, whereas in the dynamical case it also enters
+In the kinematical limit, \(\gamma\) multiplies the source term and therefore rescales the \(\operatorname{sinc}^2(st)\) profile. In the dynamical case it also enters
 \[
 \Omega_{\mathrm{abs}}=\sqrt{s^2+\gamma^2},
 \]
-so it changes the rocking-curve shape itself.
-
-With this choice, both absorbing corrections vanish simultaneously when
-\[
-\frac{1}{\xi'} \to 0,
-\]
-so that both the kinematical and dynamical absorbing expressions reduce to their corresponding non-absorbing forms.
-
-\subsection{Final forms with a common complex coupling}
-
-The absorbing kinematical rocking curve is
+so it changes the rocking-curve shape itself. The final forms are
 \[
 I_{\mathrm{kin,abs}}(t,s)
 \propto
