@@ -636,32 +636,45 @@ I_{\mathrm{dyn}}(t,s)
 1+(\xi s)^2
 }.
 \]
-
-\subsection{Equivalent sinc form of the dynamical expression}
-
+Let
+\[
+x=\frac{t}{\xi}\sqrt{1+(\xi s)^2}.
+\]
+Then using \eqref{eq:sincdef}
+\[
+\sin^2\!\left[
+\left(\frac{\pi t}{\xi}\right)\sqrt{1+(\xi s)^2}
+\right]
+=
+\sin^2(\pi x)
+=
+(\pi x)^2 \operatorname{sinc}^2(x).
+\]
+Therefore substituting back
+\[
+x=\frac{t}{\xi}\sqrt{1+(\xi s)^2},
+\]
+\[
+I_{\mathrm{dyn}}(t,s)
+\propto
+\frac{
+\pi^2
+\left(\frac{t}{\xi}\right)^2
+\left(1+(\xi s)^2\right)
+\operatorname{sinc}^2\!\left[
+\frac{t}{\xi}\sqrt{1+(\xi s)^2}
+\right]
+}{
+1+(\xi s)^2
+}.
+\]
 Let
 \[
 w=\xi s.
 \]
 
 Then
-\[
-I_{\mathrm{dyn}}(w)
-\propto
-\frac{
-\sin^2\!\left[
-\left(\frac{\pi t}{\xi}\right)\sqrt{1+w^2}
-\right]
-}{
-1+w^2
-}.
-\]
 
-Using \eqref{eq:sincdef} with
-\[
-x=\frac{t}{\xi}\sqrt{1+w^2},
-\]
-one finds
 \[
 \sin^2\!\left[
 \left(\frac{\pi t}{\xi}\right)\sqrt{1+w^2}
