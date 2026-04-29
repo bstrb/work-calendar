@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SRES vs Frame</title>
+  <meta
+    name="description"
+    content="Lightweight static reflection viewer showing SRES versus frame from the generated dataset."
+  />
+  <link rel="stylesheet" href="dfm_sres_light_assets/style.css" />
+  <script src="https://cdn.plot.ly/plotly-2.35.2.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js" defer></script>
+  <script src="dfm_sres_light_assets/app.js" defer></script>
+</head>
+<body>
+  <div class="page">
+    <header class="hero">
+      <div>
+        <p class="eyebrow">Lightweight Local-to-Web View</p>
+        <h1>SRES vs frame</h1>
+        <p class="intro">
+          Static Plotly viewer built from the generated CSV only. No server process, no frame images,
+          just the reflection scatter and a compact metadata panel.
+        </p>
+      </div>
+      <div class="stats">
+        <div class="stat-card">
+          <span>Rows</span>
+          <strong id="rowsStat">Loading</strong>
+        </div>
+        <div class="stat-card">
+          <span>Frames</span>
+          <strong id="framesStat">Loading</strong>
+        </div>
+        <div class="stat-card">
+          <span>Min SRES</span>
+          <strong id="minStat">Loading</strong>
+        </div>
+        <div class="stat-card">
+          <span>Max |SRES|</span>
+          <strong id="maxAbsStat">Loading</strong>
+        </div>
+      </div>
+    </header>
+
+    <main class="layout">
+      <section class="panel plot-panel">
+        <div class="toolbar">
+          <form id="searchForm" class="search">
+            <label for="searchInput">Jump to frame or Miller index</label>
+            <div class="search-row">
+              <input id="searchInput" type="search" placeholder="Try 1136 or (0, 0, -1)" autocomplete="off" />
+              <button type="submit">Find</button>
+            </div>
+          </form>
+
+          <label class="toggle">
+            <input id="outlierToggle" type="checkbox" />
+            <span>Show only |SRES| ≥ 3</span>
+          </label>
+        </div>
+
+        <div class="status">
+          <span id="statusBadge" class="status-badge loading">Loading</span>
+          <span id="statusText">Reading CSV and building plot...</span>
+        </div>
+
+        <div id="plot" class="plot"></div>
+      </section>
+
+      <aside class="panel detail-panel">
+        <div class="detail-header">
+          <p class="eyebrow">Selection</p>
+          <h2 id="selectionTitle">Waiting for data...</h2>
+          <p id="selectionSubtitle" class="subtitle">Click a point to pin it. Hover previews are temporary.</p>
+        </div>
+
+        <dl id="detailGrid" class="detail-grid"></dl>
+
+        <section class="note-card">
+          <p class="eyebrow">Included Data</p>
+          <p>
+            This lightweight page uses a reduced CSV with `frame`, `SRES`, `absSRES`, `Miller`, `asu`,
+            `Resolution`, `zobs`, `Fo^2_scaled`, `Fo^2_sigma_scaled`, and `Fc^2`.
+          </p>
+        </section>
+      </aside>
+    </main>
+  </div>
+</body>
+</html>
