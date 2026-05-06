@@ -1,0 +1,1556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ewald Sphere and Reciprocal Lattice Viewer</title>
+  <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --panel: #111827;
+      --panel-2: #1f2937;
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+      --line: #374151;
+      --accent: #60a5fa;
+      --accent-2: #f97316;
+      --danger: #f87171;
+      --ok: #34d399;
+      --shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
+      --radius: 14px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      min-height: 100%;
+      background: var(--bg);
+      color: var(--text);
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.35;
+    }
+
+    body {
+      overflow: hidden;
+    }
+
+    .app {
+      display: grid;
+      grid-template-columns: 365px minmax(0, 1fr);
+      height: 100vh;
+      width: 100vw;
+    }
+
+    .sidebar {
+      background: linear-gradient(180deg, #111827 0%, #0b1120 100%);
+      border-right: 1px solid var(--line);
+      overflow-y: auto;
+      padding: 18px 16px 24px;
+      box-shadow: var(--shadow);
+      z-index: 2;
+    }
+
+    .sidebar h1 {
+      margin: 0 0 8px;
+      font-size: 21px;
+      letter-spacing: -0.02em;
+    }
+
+    .subtitle {
+      color: var(--muted);
+      font-size: 13px;
+      margin: 0 0 16px;
+    }
+
+    .section {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(31, 41, 55, 0.72);
+      padding: 12px;
+      margin-bottom: 12px;
+    }
+
+    .section h2 {
+      margin: 0 0 10px;
+      font-size: 14px;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      color: #cbd5e1;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 9px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 9px;
+    }
+
+    label {
+      display: block;
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+
+    input[type="number"] {
+      width: 100%;
+      border: 1px solid #4b5563;
+      border-radius: 10px;
+      background: #020617;
+      color: var(--text);
+      padding: 8px 9px;
+      font-size: 13px;
+      outline: none;
+    }
+
+    input[type="number"]:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 2px rgba(96, 165, 250, 0.2);
+    }
+
+    .slider-row {
+      display: grid;
+      grid-template-columns: 62px minmax(0, 1fr) 78px;
+      gap: 8px;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .slider-row label {
+      margin: 0;
+    }
+
+    input[type="range"] {
+      width: 100%;
+      accent-color: var(--accent);
+    }
+
+    .check-row {
+      display: grid;
+      grid-template-columns: 20px minmax(0, 1fr);
+      gap: 7px;
+      align-items: start;
+      margin: 8px 0;
+      font-size: 13px;
+      color: #d1d5db;
+    }
+
+    .check-row input {
+      margin-top: 2px;
+      accent-color: var(--accent);
+    }
+
+    .button-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 9px;
+      margin-top: 10px;
+    }
+
+    button {
+      border: 1px solid #4b5563;
+      border-radius: 10px;
+      background: #0b1222;
+      color: var(--text);
+      padding: 9px 10px;
+      cursor: pointer;
+      font-weight: 650;
+      font-size: 13px;
+    }
+
+    button:hover {
+      border-color: var(--accent);
+      background: #111c32;
+    }
+
+    button.primary {
+      background: linear-gradient(180deg, #2563eb, #1d4ed8);
+      border-color: #3b82f6;
+    }
+
+    button.primary:hover {
+      background: linear-gradient(180deg, #3b82f6, #2563eb);
+    }
+
+    .summary {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .metric {
+      background: #020617;
+      border: 1px solid #263247;
+      border-radius: 11px;
+      padding: 8px;
+      min-height: 58px;
+    }
+
+    .metric .name {
+      color: var(--muted);
+      font-size: 11px;
+      margin-bottom: 4px;
+    }
+
+    .metric .value {
+      font-size: 16px;
+      font-weight: 750;
+      color: #f8fafc;
+      overflow-wrap: anywhere;
+    }
+
+    .message {
+      display: none;
+      padding: 10px;
+      border-radius: 11px;
+      margin-bottom: 12px;
+      font-size: 13px;
+    }
+
+    .message.warn {
+      display: block;
+      border: 1px solid rgba(251, 191, 36, 0.55);
+      background: rgba(251, 191, 36, 0.12);
+      color: #fde68a;
+    }
+
+    .message.error {
+      display: block;
+      border: 1px solid rgba(248, 113, 113, 0.6);
+      background: rgba(248, 113, 113, 0.12);
+      color: #fecaca;
+    }
+
+    .message.ok {
+      display: block;
+      border: 1px solid rgba(52, 211, 153, 0.45);
+      background: rgba(52, 211, 153, 0.1);
+      color: #bbf7d0;
+    }
+
+    .main {
+      overflow: auto;
+      padding: 16px;
+      display: grid;
+      grid-template-rows: minmax(560px, 1fr) auto;
+      gap: 16px;
+    }
+
+    .plot-grid {
+      display: grid;
+      grid-template-columns: minmax(460px, 1.35fr) minmax(390px, 1fr);
+      gap: 16px;
+      min-height: 560px;
+    }
+
+    .plot-card,
+    .notes-card {
+      background: #f8fafc;
+      color: #0f172a;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      border: 1px solid rgba(15, 23, 42, 0.12);
+    }
+
+    .plot-card header,
+    .notes-card header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 10px 13px;
+      border-bottom: 1px solid #e5e7eb;
+      background: #ffffff;
+    }
+
+    .plot-card h2,
+    .notes-card h2 {
+      margin: 0;
+      font-size: 15px;
+      color: #111827;
+    }
+
+    .plot-card .small {
+      color: #64748b;
+      font-size: 12px;
+    }
+
+    .plot {
+      height: calc(100% - 42px);
+      min-height: 510px;
+      width: 100%;
+    }
+
+    .notes-card {
+      padding-bottom: 12px;
+    }
+
+    .notes-content {
+      padding: 12px 14px 2px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      font-size: 13px;
+      color: #334155;
+    }
+
+    .notes-content h3 {
+      margin: 0 0 6px;
+      font-size: 13px;
+      color: #111827;
+    }
+
+    .notes-content p,
+    .notes-content ul {
+      margin: 0;
+    }
+
+    .notes-content ul {
+      padding-left: 18px;
+    }
+
+    code {
+      background: #e2e8f0;
+      border-radius: 5px;
+      padding: 1px 4px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 12px;
+    }
+
+    .fine-print {
+      color: var(--muted);
+      font-size: 11px;
+      margin-top: 8px;
+    }
+
+    @media (max-width: 1180px) {
+      body {
+        overflow: auto;
+      }
+
+      .app {
+        grid-template-columns: 1fr;
+        height: auto;
+      }
+
+      .sidebar {
+        max-height: none;
+        border-right: none;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .main {
+        overflow: visible;
+      }
+
+      .plot-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .notes-content {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <h1>Ewald sphere viewer</h1>
+      <p class="subtitle">
+        Reciprocal lattice, Ewald sphere cap, excitation error, and idealized detector projection.
+      </p>
+
+      <div id="message" class="message"></div>
+
+      <section class="section">
+        <h2>Unit cell</h2>
+        <div class="grid-3">
+          <div>
+            <label for="a">a / Å</label>
+            <input id="a" type="number" step="0.1" min="0.001" />
+          </div>
+          <div>
+            <label for="b">b / Å</label>
+            <input id="b" type="number" step="0.1" min="0.001" />
+          </div>
+          <div>
+            <label for="c">c / Å</label>
+            <input id="c" type="number" step="0.1" min="0.001" />
+          </div>
+        </div>
+        <div style="height: 9px"></div>
+        <div class="grid-3">
+          <div>
+            <label for="alpha">alpha / deg</label>
+            <input id="alpha" type="number" step="0.1" min="0.001" max="179.999" />
+          </div>
+          <div>
+            <label for="beta">beta / deg</label>
+            <input id="beta" type="number" step="0.1" min="0.001" max="179.999" />
+          </div>
+          <div>
+            <label for="gamma">gamma / deg</label>
+            <input id="gamma" type="number" step="0.1" min="0.001" max="179.999" />
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Beam and reciprocal shell</h2>
+        <div class="grid-2">
+          <div>
+            <label for="lambda">lambda / Å</label>
+            <input id="lambda" type="number" step="0.0001" min="0.000001" />
+          </div>
+          <div>
+            <label for="sgCutoff">|s<sub>g</sub>| cutoff / Å^-1</label>
+            <input id="sgCutoff" type="number" step="0.001" min="0.0000001" />
+          </div>
+          <div>
+            <label for="dMin">d_min / Å</label>
+            <input id="dMin" type="number" step="0.1" min="0.000001" />
+          </div>
+          <div>
+            <label for="dMax">d_max / Å</label>
+            <input id="dMax" type="number" step="0.1" min="0.000001" />
+          </div>
+          <div>
+            <label for="hklLimit">HKL safety cap</label>
+            <input id="hklLimit" type="number" step="1" min="1" max="200" />
+          </div>
+          <div>
+            <label for="markerSize">Excited marker size</label>
+            <input id="markerSize" type="number" step="1" min="2" max="18" />
+          </div>
+        </div>
+        <p class="fine-print">
+          HKL bounds are derived from d_min; the cap only prevents accidentally huge scans.
+        </p>
+      </section>
+
+      <section class="section">
+        <h2>Euler orientation</h2>
+        <label class="check-row">
+          <input id="useZoneAxis" type="checkbox" />
+          <span>Align zone axis [u v w] with the beam before applying Euler angles</span>
+        </label>
+        <div class="grid-3">
+          <div>
+            <label for="zoneU">u</label>
+            <input id="zoneU" type="number" step="1" />
+          </div>
+          <div>
+            <label for="zoneV">v</label>
+            <input id="zoneV" type="number" step="1" />
+          </div>
+          <div>
+            <label for="zoneW">w</label>
+            <input id="zoneW" type="number" step="1" />
+          </div>
+        </div>
+        <div style="height: 9px"></div>
+        <div class="slider-row">
+          <label for="phi">phi z</label>
+          <input id="phiSlider" type="range" min="-180" max="180" step="0.5" />
+          <input id="phi" type="number" min="-360" max="360" step="0.5" />
+        </div>
+        <div class="slider-row">
+          <label for="theta">theta y</label>
+          <input id="thetaSlider" type="range" min="-180" max="180" step="0.5" />
+          <input id="theta" type="number" min="-360" max="360" step="0.5" />
+        </div>
+        <div class="slider-row">
+          <label for="psi">psi x</label>
+          <input id="psiSlider" type="range" min="-180" max="180" step="0.5" />
+          <input id="psi" type="number" min="-360" max="360" step="0.5" />
+        </div>
+        <p class="fine-print">
+          Convention: first align direct c, or enabled zone axis, to lab +z. Then use <code>R = Rz(phi) Ry(theta) Rx(psi)</code> on reciprocal vectors.
+        </p>
+      </section>
+
+      <section class="section">
+        <h2>Display</h2>
+        <label class="check-row">
+          <input id="showAll" type="checkbox" />
+          <span>Show all reciprocal-lattice points in the d shell as grey markers</span>
+        </label>
+        <label class="check-row">
+          <input id="showSphere" type="checkbox" />
+          <span>Show local Ewald sphere cap as translucent blue surface</span>
+        </label>
+        <label class="check-row">
+          <input id="showBeam" type="checkbox" />
+          <span>Show beam direction and reciprocal-space origin</span>
+        </label>
+        <label class="check-row">
+          <input id="showLabels" type="checkbox" />
+          <span>Label excited reflections with hkl values</span>
+        </label>
+        <div class="button-row">
+          <button class="primary" id="updateButton" type="button">Update</button>
+          <button id="resetButton" type="button">Reset</button>
+          <button id="downloadCsvButton" type="button">Download CSV</button>
+          <button id="cameraButton" type="button">Reset camera</button>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Summary</h2>
+        <div class="summary">
+          <div class="metric">
+            <div class="name">Scanned HKLs</div>
+            <div id="sumGenerated" class="value">-</div>
+          </div>
+          <div class="metric">
+            <div class="name">In d shell</div>
+            <div id="sumShell" class="value">-</div>
+          </div>
+          <div class="metric">
+            <div class="name">Excited</div>
+            <div id="sumExcited" class="value">-</div>
+          </div>
+          <div class="metric">
+            <div class="name">Detector points</div>
+            <div id="sumDetector" class="value">-</div>
+          </div>
+          <div class="metric">
+            <div class="name">Ewald radius</div>
+            <div id="sumRadius" class="value">-</div>
+          </div>
+          <div class="metric">
+            <div class="name">Min |s_g|</div>
+            <div id="sumMinSg" class="value">-</div>
+          </div>
+        </div>
+      </section>
+    </aside>
+
+    <main class="main">
+      <div class="plot-grid">
+        <section class="plot-card">
+          <header>
+            <h2>3D reciprocal lattice and Ewald sphere</h2>
+            <span class="small">Å^-1 coordinates</span>
+          </header>
+          <div id="plot3d" class="plot"></div>
+        </section>
+
+        <section class="plot-card">
+          <header>
+            <h2>Idealized detector projection</h2>
+            <span class="small">arbitrary camera length units</span>
+          </header>
+          <div id="plot2d" class="plot"></div>
+        </section>
+      </div>
+
+      <section class="notes-card">
+        <header>
+          <h2>Geometry notes</h2>
+        </header>
+        <div class="notes-content">
+          <div>
+            <h3>Ewald sphere</h3>
+            <p>
+              The incident wavevector is <code>k0 = (0, 0, 1/lambda)</code>. The sphere center is
+              <code>-k0</code> and the radius is <code>|k0|</code>, so the sphere passes through the reciprocal-space origin.
+            </p>
+          </div>
+          <div>
+            <h3>Excitation error</h3>
+            <p>
+              Reflections are highlighted when <code>|s_g| <= cutoff</code>, where
+              <code>s_g = |k0 + g| - |k0|</code>. Darker red means closer to exact Bragg condition.
+            </p>
+          </div>
+          <div>
+            <h3>Detector projection</h3>
+            <p>
+              Only excited reflections are projected. The simplified detector is perpendicular to +z at
+              <code>L = 1</code>, with <code>x = L kout_x/kout_z</code> and <code>y = L kout_y/kout_z</code>.
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    "use strict";
+
+    /**************************************************************************
+     * Default app state.
+     * Units:
+     * - Unit-cell lengths and wavelength are in Å.
+     * - Reciprocal-space vectors and excitation error are in Å^-1.
+     * - Detector coordinates are dimensionless arbitrary camera-length units.
+     **************************************************************************/
+    const DEFAULTS = Object.freeze({
+      a: 10.0,
+      b: 10.0,
+      c: 10.0,
+      alpha: 90.0,
+      beta: 90.0,
+      gamma: 90.0,
+      lambda: 0.01968,
+      dMin: 0.4,
+      dMax: 20.0,
+      sgCutoff: 0.002,
+      hklLimit: 60,
+      markerSize: 2,
+      useZoneAxis: false,
+      zoneU: 0,
+      zoneV: 0,
+      zoneW: 1,
+      phi: 0.0,
+      theta: 0.0,
+      psi: 0.0,
+      showAll: true,
+      showSphere: true,
+      showBeam: true,
+      showLabels: false
+    });
+
+    const MAX_RAW_HKLS = 350000;
+    const DETECTOR_DISTANCE = 1.0;
+    const EPS = 1e-12;
+
+    let lastResults = null;
+    let debounceTimer = null;
+    let cameraMemory = null;
+
+    const ids = [
+      "a", "b", "c", "alpha", "beta", "gamma", "lambda", "dMin", "dMax",
+      "sgCutoff", "hklLimit", "markerSize", "zoneU", "zoneV", "zoneW", "phi", "theta", "psi"
+    ];
+
+    const checkboxIds = ["useZoneAxis", "showAll", "showSphere", "showBeam", "showLabels"];
+
+    function byId(id) {
+      return document.getElementById(id);
+    }
+
+    function degToRad(deg) {
+      return deg * Math.PI / 180.0;
+    }
+
+    function clamp(value, lo, hi) {
+      return Math.max(lo, Math.min(hi, value));
+    }
+
+    function fmt(value, digits = 4) {
+      if (!Number.isFinite(value)) return "-";
+      if (Math.abs(value) >= 10000 || (Math.abs(value) > 0 && Math.abs(value) < 0.001)) {
+        return value.toExponential(3);
+      }
+      return value.toFixed(digits).replace(/\.0+$/, "").replace(/(\.\d*?)0+$/, "$1");
+    }
+
+    function dot(a, b) {
+      return a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
+    }
+
+    function cross(a, b) {
+      return [
+        a[1] * b[2] - a[2] * b[1],
+        a[2] * b[0] - a[0] * b[2],
+        a[0] * b[1] - a[1] * b[0]
+      ];
+    }
+
+    function norm(v) {
+      return Math.sqrt(dot(v, v));
+    }
+
+    function add(a, b) {
+      return [a[0] + b[0], a[1] + b[1], a[2] + b[2]];
+    }
+
+    function sub(a, b) {
+      return [a[0] - b[0], a[1] - b[1], a[2] - b[2]];
+    }
+
+    function scale(v, s) {
+      return [v[0] * s, v[1] * s, v[2] * s];
+    }
+
+    function normalize(v, name = "vector") {
+      const n = norm(v);
+      if (!Number.isFinite(n) || n < EPS) {
+        throw new Error(`Cannot normalize ${name}; norm is zero or invalid.`);
+      }
+      return scale(v, 1.0 / n);
+    }
+
+    function transpose3(m) {
+      return [
+        [m[0][0], m[1][0], m[2][0]],
+        [m[0][1], m[1][1], m[2][1]],
+        [m[0][2], m[1][2], m[2][2]]
+      ];
+    }
+
+    function matVec(m, v) {
+      return [
+        m[0][0] * v[0] + m[0][1] * v[1] + m[0][2] * v[2],
+        m[1][0] * v[0] + m[1][1] * v[1] + m[1][2] * v[2],
+        m[2][0] * v[0] + m[2][1] * v[1] + m[2][2] * v[2]
+      ];
+    }
+
+    function matMul(a, b) {
+      const out = [
+        [0, 0, 0],
+        [0, 0, 0],
+        [0, 0, 0]
+      ];
+      for (let i = 0; i < 3; i++) {
+        for (let j = 0; j < 3; j++) {
+          out[i][j] = a[i][0] * b[0][j] + a[i][1] * b[1][j] + a[i][2] * b[2][j];
+        }
+      }
+      return out;
+    }
+
+    function det3(m) {
+      return (
+        m[0][0] * (m[1][1] * m[2][2] - m[1][2] * m[2][1]) -
+        m[0][1] * (m[1][0] * m[2][2] - m[1][2] * m[2][0]) +
+        m[0][2] * (m[1][0] * m[2][1] - m[1][1] * m[2][0])
+      );
+    }
+
+    function inverse3(m) {
+      const d = det3(m);
+      if (!Number.isFinite(d) || Math.abs(d) < EPS) {
+        throw new Error("The unit-cell basis is singular or nearly singular. Check cell angles.");
+      }
+      const inv = [
+        [
+          (m[1][1] * m[2][2] - m[1][2] * m[2][1]) / d,
+          (m[0][2] * m[2][1] - m[0][1] * m[2][2]) / d,
+          (m[0][1] * m[1][2] - m[0][2] * m[1][1]) / d
+        ],
+        [
+          (m[1][2] * m[2][0] - m[1][0] * m[2][2]) / d,
+          (m[0][0] * m[2][2] - m[0][2] * m[2][0]) / d,
+          (m[0][2] * m[1][0] - m[0][0] * m[1][2]) / d
+        ],
+        [
+          (m[1][0] * m[2][1] - m[1][1] * m[2][0]) / d,
+          (m[0][1] * m[2][0] - m[0][0] * m[2][1]) / d,
+          (m[0][0] * m[1][1] - m[0][1] * m[1][0]) / d
+        ]
+      ];
+      return inv;
+    }
+
+    function rotationX(angleDeg) {
+      const a = degToRad(angleDeg);
+      const c = Math.cos(a);
+      const s = Math.sin(a);
+      return [
+        [1, 0, 0],
+        [0, c, -s],
+        [0, s, c]
+      ];
+    }
+
+    function rotationY(angleDeg) {
+      const a = degToRad(angleDeg);
+      const c = Math.cos(a);
+      const s = Math.sin(a);
+      return [
+        [c, 0, s],
+        [0, 1, 0],
+        [-s, 0, c]
+      ];
+    }
+
+    function rotationZ(angleDeg) {
+      const a = degToRad(angleDeg);
+      const c = Math.cos(a);
+      const s = Math.sin(a);
+      return [
+        [c, -s, 0],
+        [s, c, 0],
+        [0, 0, 1]
+      ];
+    }
+
+    function eulerRotation(params) {
+      // Column-vector convention: g_lab = Rz(phi) * Ry(theta) * Rx(psi) * g_zero.
+      return matMul(rotationZ(params.phi), matMul(rotationY(params.theta), rotationX(params.psi)));
+    }
+
+    function validateParams(p) {
+      const lengthKeys = ["a", "b", "c", "lambda", "dMin", "dMax", "sgCutoff"];
+      for (const key of lengthKeys) {
+        if (!Number.isFinite(p[key]) || p[key] <= 0) {
+          throw new Error(`${key} must be a positive number.`);
+        }
+      }
+      for (const key of ["alpha", "beta", "gamma"]) {
+        if (!Number.isFinite(p[key]) || p[key] <= 0 || p[key] >= 180) {
+          throw new Error(`${key} must be between 0 and 180 degrees.`);
+        }
+      }
+      if (p.dMin > p.dMax) {
+        throw new Error("d_min must be smaller than or equal to d_max.");
+      }
+      if (!Number.isInteger(p.hklLimit) || p.hklLimit < 1) {
+        throw new Error("HKL safety cap must be a positive integer.");
+      }
+      if (p.useZoneAxis) {
+        for (const key of ["zoneU", "zoneV", "zoneW"]) {
+          if (!Number.isFinite(p[key])) {
+            throw new Error("Zone-axis indices must be finite numbers.");
+          }
+        }
+        if (Math.abs(p.zoneU) + Math.abs(p.zoneV) + Math.abs(p.zoneW) < EPS) {
+          throw new Error("Zone axis [u v w] cannot be [0 0 0].");
+        }
+      }
+    }
+
+    function directBasisFromCell(p) {
+      // Direct basis matrix A has direct-space basis vectors as columns.
+      const alpha = degToRad(p.alpha);
+      const beta = degToRad(p.beta);
+      const gamma = degToRad(p.gamma);
+      const cosA = Math.cos(alpha);
+      const cosB = Math.cos(beta);
+      const cosG = Math.cos(gamma);
+      const sinG = Math.sin(gamma);
+
+      if (Math.abs(sinG) < EPS) {
+        throw new Error("gamma is too close to 0 or 180 degrees, giving a singular basis.");
+      }
+
+      const aVec = [p.a, 0, 0];
+      const bVec = [p.b * cosG, p.b * sinG, 0];
+      const cX = p.c * cosB;
+      const cY = p.c * (cosA - cosB * cosG) / sinG;
+      const cZ2 = p.c * p.c - cX * cX - cY * cY;
+      if (cZ2 < -1e-8) {
+        throw new Error("The cell angles are geometrically inconsistent; c_z^2 is negative.");
+      }
+      const cZ = Math.sqrt(Math.max(cZ2, 0));
+      const cVec = [cX, cY, cZ];
+
+      return [
+        [aVec[0], bVec[0], cVec[0]],
+        [aVec[1], bVec[1], cVec[1]],
+        [aVec[2], bVec[2], cVec[2]]
+      ];
+    }
+
+    function reciprocalBasisFromDirect(A) {
+      // Reciprocal basis without 2*pi: columns are a*, b*, c*.
+      return transpose3(inverse3(A));
+    }
+
+    function reciprocalIndexBoundsFromResolution(A, dMin) {
+      // For q = |h a* + k b* + l c*| <= 1/d_min, the largest possible
+      // absolute index i is q_max * sqrt((G*)^-1_ii). Since (G*)^-1 is the
+      // direct-space metric, its diagonal entries are |a|^2, |b|^2, |c|^2.
+      const qMax = 1.0 / dMin;
+      const directMetric = matMul(transpose3(A), A);
+      return [0, 1, 2].map(i => {
+        const radius = qMax * Math.sqrt(Math.max(directMetric[i][i], 0.0));
+        return Math.ceil(Math.max(0.0, radius - 1e-10));
+      });
+    }
+
+    function countBoundedHkls([hMax, kMax, lMax]) {
+      return (2 * hMax + 1) * (2 * kMax + 1) * (2 * lMax + 1) - 1;
+    }
+
+    function validateDerivedHklBounds(bounds, safetyCap) {
+      const [hMax, kMax, lMax] = bounds;
+      const neededCap = Math.max(hMax, kMax, lMax);
+      if (neededCap > safetyCap) {
+        throw new Error(
+          `d_min requires HKL bounds +/-[${hMax} ${kMax} ${lMax}], ` +
+          `which exceeds the current safety cap of ${safetyCap}. ` +
+          `Increase the HKL safety cap or increase d_min.`
+        );
+      }
+
+      const rawCount = countBoundedHkls(bounds);
+      if (rawCount > MAX_RAW_HKLS) {
+        throw new Error(
+          `d_min requires scanning ${rawCount.toLocaleString()} HKLs before d_max filtering. ` +
+          `Increase d_min or reduce the cell dimensions/resolution range.`
+        );
+      }
+    }
+
+    function columnsOfMatrix(m) {
+      return [
+        [m[0][0], m[1][0], m[2][0]],
+        [m[0][1], m[1][1], m[2][1]],
+        [m[0][2], m[1][2], m[2][2]]
+      ];
+    }
+
+    function zeroOrientationAlignment(A, zoneAxis = null) {
+      // This aligns direct-space c, or the chosen zone axis, to lab +z at zero Euler angles.
+      // The lab +x direction is chosen from a projected direct-space basis vector.
+      const [aVec, bVec, cVec] = columnsOfMatrix(A);
+      let zReference = cVec;
+      let zName = "direct c axis";
+      if (zoneAxis) {
+        const [u, v, w] = zoneAxis;
+        zReference = add(add(scale(aVec, u), scale(bVec, v)), scale(cVec, w));
+        zName = `zone axis [${u} ${v} ${w}]`;
+      }
+
+      const zAxis = normalize(zReference, zName);
+      let xCandidate = sub(aVec, scale(zAxis, dot(aVec, zAxis)));
+      if (norm(xCandidate) < EPS) {
+        xCandidate = sub(bVec, scale(zAxis, dot(bVec, zAxis)));
+      }
+      if (norm(xCandidate) < EPS) {
+        xCandidate = sub(cVec, scale(zAxis, dot(cVec, zAxis)));
+      }
+      const xAxis = normalize(xCandidate, "projected direct-space reference axis");
+      const yAxis = normalize(cross(zAxis, xAxis), "zero-orientation y axis");
+
+      // Rows are the lab basis vectors expressed in the original crystallographic Cartesian frame.
+      // Multiplying this by a vector gives its coordinates in the zero-orientation lab frame.
+      return [
+        [xAxis[0], xAxis[1], xAxis[2]],
+        [yAxis[0], yAxis[1], yAxis[2]],
+        [zAxis[0], zAxis[1], zAxis[2]]
+      ];
+    }
+
+    function buildReciprocalDataset(params) {
+      validateParams(params);
+
+      const A = directBasisFromCell(params);
+      const B = reciprocalBasisFromDirect(A);
+      const hklBounds = reciprocalIndexBoundsFromResolution(A, params.dMin);
+      validateDerivedHklBounds(hklBounds, params.hklLimit);
+
+      const zoneAxis = params.useZoneAxis ? [params.zoneU, params.zoneV, params.zoneW] : null;
+      const R0 = zeroOrientationAlignment(A, zoneAxis);
+      const RUser = eulerRotation(params);
+      const R = matMul(RUser, R0);
+
+      const kMagnitude = 1.0 / params.lambda;
+      const k0 = [0, 0, kMagnitude];
+      const rawCount = countBoundedHkls(hklBounds);
+      const [hMax, kMax, lMax] = hklBounds;
+
+      const all = [];
+      const excited = [];
+      const detector = [];
+      let minAbsSg = Infinity;
+      let maxAbsCoordinate = 0;
+      let maxAbsXY = 0;
+
+      for (let h = -hMax; h <= hMax; h++) {
+        for (let k = -kMax; k <= kMax; k++) {
+          for (let l = -lMax; l <= lMax; l++) {
+            if (h === 0 && k === 0 && l === 0) continue;
+
+            const hkl = [h, k, l];
+            const gCrystal = matVec(B, hkl);
+            const gNorm = norm(gCrystal);
+            if (!Number.isFinite(gNorm) || gNorm < EPS) continue;
+
+            const d = 1.0 / gNorm;
+            if (d < params.dMin || d > params.dMax) continue;
+
+            const gLab = matVec(R, gCrystal);
+            const kout = add(k0, gLab);
+            const sg = norm(kout) - kMagnitude;
+            const absSg = Math.abs(sg);
+            const score = Math.max(0.0, 1.0 - absSg / params.sgCutoff);
+
+            minAbsSg = Math.min(minAbsSg, absSg);
+            maxAbsCoordinate = Math.max(
+              maxAbsCoordinate,
+              Math.abs(gLab[0]),
+              Math.abs(gLab[1]),
+              Math.abs(gLab[2])
+            );
+            maxAbsXY = Math.max(maxAbsXY, Math.abs(gLab[0]), Math.abs(gLab[1]));
+
+            const record = {
+              h,
+              k,
+              l,
+              d,
+              sg,
+              absSg,
+              score,
+              gx: gLab[0],
+              gy: gLab[1],
+              gz: gLab[2],
+              koutx: kout[0],
+              kouty: kout[1],
+              koutz: kout[2]
+            };
+
+            all.push(record);
+
+            if (absSg <= params.sgCutoff) {
+              excited.push(record);
+              if (kout[2] > EPS) {
+                detector.push({
+                  ...record,
+                  xdet: DETECTOR_DISTANCE * kout[0] / kout[2],
+                  ydet: DETECTOR_DISTANCE * kout[1] / kout[2]
+                });
+              }
+            }
+          }
+        }
+      }
+
+      if (all.length === 0) {
+        maxAbsCoordinate = 1.0 / params.dMin;
+        maxAbsXY = maxAbsCoordinate;
+      }
+
+      return {
+        params,
+        A,
+        B,
+        R,
+        hklBounds,
+        k0,
+        kMagnitude,
+        rawCount,
+        all,
+        excited,
+        detector,
+        minAbsSg,
+        maxAbsCoordinate,
+        maxAbsXY
+      };
+    }
+
+    function makeEwaldSphereCap(results) {
+      const k = results.kMagnitude;
+      const dataWidth = Math.max(results.maxAbsXY, 1.0 / results.params.dMin, 0.05);
+      const halfWidth = Math.min(dataWidth * 1.12, k * 0.98);
+      const n = 62;
+      const xVals = [];
+      const yVals = [];
+      const zRows = [];
+
+      for (let i = 0; i < n; i++) {
+        xVals.push(-halfWidth + 2 * halfWidth * i / (n - 1));
+        yVals.push(-halfWidth + 2 * halfWidth * i / (n - 1));
+      }
+
+      for (let j = 0; j < n; j++) {
+        const row = [];
+        const y = yVals[j];
+        for (let i = 0; i < n; i++) {
+          const x = xVals[i];
+          const under = k * k - x * x - y * y;
+          row.push(under >= 0 ? -k + Math.sqrt(under) : null);
+        }
+        zRows.push(row);
+      }
+
+      return {
+        type: "surface",
+        name: "Ewald sphere cap",
+        x: xVals,
+        y: yVals,
+        z: zRows,
+        showscale: false,
+        hoverinfo: "skip",
+        opacity: 0.34,
+        colorscale: [
+          [0, "rgb(180, 215, 255)"],
+          [1, "rgb(70, 130, 255)"]
+        ],
+        contours: {
+          x: { show: false },
+          y: { show: false },
+          z: { show: false }
+        }
+      };
+    }
+
+    function recordsToCustomData(records) {
+      return records.map(r => [r.h, r.k, r.l, r.d, r.sg, r.score]);
+    }
+
+    function recordsToDetectorCustomData(records) {
+      return records.map(r => [r.h, r.k, r.l, r.d, r.sg, r.score, r.xdet, r.ydet]);
+    }
+
+    function make3DTraces(results) {
+      const p = results.params;
+      const traces = [];
+
+      if (p.showSphere) {
+        traces.push(makeEwaldSphereCap(results));
+      }
+
+      if (p.showAll && results.all.length > 0) {
+        traces.push({
+          type: "scatter3d",
+          mode: "markers",
+          name: "All points in d shell",
+          x: results.all.map(r => r.gx),
+          y: results.all.map(r => r.gy),
+          z: results.all.map(r => r.gz),
+          customdata: recordsToCustomData(results.all),
+          marker: {
+            size: 2.4,
+            color: "rgba(115, 125, 140, 0.38)",
+            line: { width: 0 }
+          },
+          hovertemplate:
+            "hkl: (%{customdata[0]}, %{customdata[1]}, %{customdata[2]})<br>" +
+            "d: %{customdata[3]:.4f} Å<br>" +
+            "s_g: %{customdata[4]:.5f} Å^-1<br>" +
+            "<extra>reciprocal point</extra>"
+        });
+      }
+
+      if (results.excited.length > 0) {
+        const sizes = results.excited.map(r => p.markerSize * (0.72 + 0.72 * r.score));
+        const labels = results.excited.map(r => `(${r.h} ${r.k} ${r.l})`);
+        traces.push({
+          type: "scatter3d",
+          mode: p.showLabels ? "markers+text" : "markers",
+          name: "Excited reflections",
+          x: results.excited.map(r => r.gx),
+          y: results.excited.map(r => r.gy),
+          z: results.excited.map(r => r.gz),
+          text: labels,
+          textposition: "top center",
+          textfont: { size: 10, color: "#7f1d1d" },
+          customdata: recordsToCustomData(results.excited),
+          marker: {
+            size: sizes,
+            color: results.excited.map(r => r.score),
+            cmin: 0,
+            cmax: 1,
+            colorscale: [
+              [0.0, "rgb(255, 214, 186)"],
+              [0.45, "rgb(248, 113, 72)"],
+              [1.0, "rgb(127, 0, 0)"]
+            ],
+            colorbar: {
+              title: "Bragg closeness",
+              thickness: 13,
+              len: 0.62,
+              x: 1.02
+            },
+            opacity: 0.98,
+            line: { color: "rgba(90, 0, 0, 0.6)", width: 0.5 }
+          },
+          hovertemplate:
+            "hkl: (%{customdata[0]}, %{customdata[1]}, %{customdata[2]})<br>" +
+            "d: %{customdata[3]:.4f} Å<br>" +
+            "s_g: %{customdata[4]:.6f} Å^-1<br>" +
+            "score: %{customdata[5]:.3f}<br>" +
+            "<extra>excited</extra>"
+        });
+      }
+
+      if (p.showBeam) {
+        const axisRange = plotRange(results);
+        traces.push({
+          type: "scatter3d",
+          mode: "lines+text",
+          name: "beam +z",
+          x: [0, 0],
+          y: [0, 0],
+          z: [-axisRange * 0.85, axisRange * 0.85],
+          text: ["", "beam +z"],
+          textposition: "top center",
+          line: { color: "rgb(234, 88, 12)", width: 5 },
+          hoverinfo: "skip"
+        });
+        traces.push({
+          type: "scatter3d",
+          mode: "markers+text",
+          name: "origin",
+          x: [0],
+          y: [0],
+          z: [0],
+          text: ["origin"],
+          textposition: "bottom center",
+          marker: { size: 5.5, color: "rgb(15, 23, 42)", symbol: "circle" },
+          hovertemplate: "reciprocal-space origin<extra></extra>"
+        });
+      }
+
+      return traces;
+    }
+
+    function plotRange(results) {
+      const shellRange = Math.max(results.maxAbsCoordinate, 1.0 / results.params.dMin, 0.05);
+      return shellRange * 1.16;
+    }
+
+    function make3DLayout(results) {
+      const r = plotRange(results);
+      const baseCamera = cameraMemory || { eye: { x: 1.55, y: 1.75, z: 1.15 } };
+      return {
+        margin: { l: 0, r: 0, t: 0, b: 0 },
+        paper_bgcolor: "#f8fafc",
+        plot_bgcolor: "#f8fafc",
+        showlegend: true,
+        legend: {
+          x: 0.01,
+          y: 0.99,
+          bgcolor: "rgba(255,255,255,0.78)",
+          bordercolor: "rgba(148,163,184,0.55)",
+          borderwidth: 1,
+          font: { size: 11 }
+        },
+        scene: {
+          xaxis: { title: "g_x / Å^-1", range: [-r, r], zeroline: true, gridcolor: "#dbe3ee" },
+          yaxis: { title: "g_y / Å^-1", range: [-r, r], zeroline: true, gridcolor: "#dbe3ee" },
+          zaxis: { title: "g_z / Å^-1", range: [-r, r], zeroline: true, gridcolor: "#dbe3ee" },
+          aspectmode: "cube",
+          camera: baseCamera,
+          bgcolor: "#f8fafc"
+        },
+        uirevision: "keep-camera"
+      };
+    }
+
+    function makeDetectorTraces(results) {
+      const traces = [];
+      if (results.detector.length > 0) {
+        traces.push({
+          type: "scatter",
+          mode: results.params.showLabels ? "markers+text" : "markers",
+          name: "Projected excited reflections",
+          x: results.detector.map(r => r.xdet),
+          y: results.detector.map(r => r.ydet),
+          text: results.detector.map(r => `(${r.h} ${r.k} ${r.l})`),
+          textposition: "top center",
+          textfont: { size: 10, color: "#7f1d1d" },
+          customdata: recordsToDetectorCustomData(results.detector),
+          marker: {
+            size: results.detector.map(r => results.params.markerSize * (0.9 + 0.65 * r.score)),
+            color: results.detector.map(r => r.score),
+            cmin: 0,
+            cmax: 1,
+            colorscale: [
+              [0.0, "rgb(255, 214, 186)"],
+              [0.45, "rgb(248, 113, 72)"],
+              [1.0, "rgb(127, 0, 0)"]
+            ],
+            line: { color: "rgba(90, 0, 0, 0.55)", width: 0.7 },
+            opacity: 0.98,
+            colorbar: {
+              title: "Bragg closeness",
+              thickness: 13,
+              len: 0.62,
+              x: 1.02
+            }
+          },
+          hovertemplate:
+            "hkl: (%{customdata[0]}, %{customdata[1]}, %{customdata[2]})<br>" +
+            "d: %{customdata[3]:.4f} Å<br>" +
+            "s_g: %{customdata[4]:.6f} Å^-1<br>" +
+            "score: %{customdata[5]:.3f}<br>" +
+            "x_det: %{customdata[6]:.5f}<br>" +
+            "y_det: %{customdata[7]:.5f}<br>" +
+            "<extra>detector</extra>"
+        });
+      }
+
+      traces.push({
+        type: "scatter",
+        mode: "markers+text",
+        name: "direct beam",
+        x: [0],
+        y: [0],
+        text: ["direct beam"],
+        textposition: "bottom center",
+        marker: { size: 10, color: "rgb(15, 23, 42)", symbol: "cross" },
+        hovertemplate: "direct beam at (0, 0)<extra></extra>"
+      });
+
+      return traces;
+    }
+
+    function makeDetectorLayout(results) {
+      let r = 0.04;
+      if (results.detector.length > 0) {
+        for (const rec of results.detector) {
+          r = Math.max(r, Math.abs(rec.xdet), Math.abs(rec.ydet));
+        }
+        r *= 1.25;
+      }
+      return {
+        margin: { l: 55, r: 20, t: 8, b: 50 },
+        paper_bgcolor: "#f8fafc",
+        plot_bgcolor: "#ffffff",
+        showlegend: true,
+        legend: {
+          x: 0.01,
+          y: 0.99,
+          bgcolor: "rgba(255,255,255,0.8)",
+          bordercolor: "rgba(148,163,184,0.55)",
+          borderwidth: 1,
+          font: { size: 11 }
+        },
+        xaxis: {
+          title: "x detector / arbitrary units",
+          range: [-r, r],
+          zeroline: true,
+          zerolinewidth: 1.5,
+          gridcolor: "#e2e8f0",
+          scaleanchor: "y",
+          scaleratio: 1
+        },
+        yaxis: {
+          title: "y detector / arbitrary units",
+          range: [-r, r],
+          zeroline: true,
+          zerolinewidth: 1.5,
+          gridcolor: "#e2e8f0"
+        },
+        annotations: results.detector.length === 0 ? [{
+          x: 0.5,
+          y: 0.5,
+          xref: "paper",
+          yref: "paper",
+          text: "No excited reflections project onto the forward detector for the current settings.",
+          showarrow: false,
+          font: { color: "#64748b", size: 13 },
+          bgcolor: "rgba(255,255,255,0.85)",
+          bordercolor: "#cbd5e1",
+          borderwidth: 1,
+          borderpad: 8
+        }] : [],
+        uirevision: "detector"
+      };
+    }
+
+    function setMessage(text, type = "ok") {
+      const el = byId("message");
+      if (!text) {
+        el.textContent = "";
+        el.className = "message";
+        return;
+      }
+      el.textContent = text;
+      el.className = `message ${type}`;
+    }
+
+    function updateSummary(results) {
+      byId("sumGenerated").textContent = results.rawCount.toLocaleString();
+      byId("sumShell").textContent = results.all.length.toLocaleString();
+      byId("sumExcited").textContent = results.excited.length.toLocaleString();
+      byId("sumDetector").textContent = results.detector.length.toLocaleString();
+      byId("sumRadius").textContent = `${fmt(results.kMagnitude, 4)} Å^-1`;
+      byId("sumMinSg").textContent = Number.isFinite(results.minAbsSg) ? `${fmt(results.minAbsSg, 6)} Å^-1` : "-";
+    }
+
+    function collectParams() {
+      const p = {};
+      for (const id of ids) {
+        const value = Number(byId(id).value);
+        p[id] = value;
+      }
+      p.hklLimit = Math.round(p.hklLimit);
+      p.zoneU = Math.round(p.zoneU);
+      p.zoneV = Math.round(p.zoneV);
+      p.zoneW = Math.round(p.zoneW);
+      for (const id of checkboxIds) {
+        p[id] = byId(id).checked;
+      }
+      return p;
+    }
+
+    function setControls(values) {
+      for (const id of ids) {
+        byId(id).value = values[id];
+      }
+      for (const id of checkboxIds) {
+        byId(id).checked = Boolean(values[id]);
+      }
+      syncSliderFromNumber("phi");
+      syncSliderFromNumber("theta");
+      syncSliderFromNumber("psi");
+    }
+
+    function scheduleUpdate() {
+      clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(updateApp, 130);
+    }
+
+    function updateApp() {
+      try {
+        if (lastResults) {
+          const plot = byId("plot3d");
+          if (plot && plot._fullLayout && plot._fullLayout.scene && plot._fullLayout.scene.camera) {
+            cameraMemory = plot._fullLayout.scene.camera;
+          }
+        }
+
+        const params = collectParams();
+        const results = buildReciprocalDataset(params);
+        lastResults = results;
+
+        const traces3d = make3DTraces(results);
+        const layout3d = make3DLayout(results);
+        const traces2d = makeDetectorTraces(results);
+        const layout2d = makeDetectorLayout(results);
+        const plotConfig = {
+          responsive: true,
+          displaylogo: false,
+          modeBarButtonsToRemove: ["lasso2d", "select2d"]
+        };
+
+        Plotly.react("plot3d", traces3d, layout3d, plotConfig);
+        Plotly.react("plot2d", traces2d, layout2d, plotConfig);
+        updateSummary(results);
+
+        if (results.all.length === 0) {
+          setMessage("No reciprocal-lattice points are inside the current d_min/d_max shell. Widen the shell by lowering d_min or increasing d_max.", "warn");
+        } else if (results.excited.length === 0) {
+          setMessage("No reflections satisfy the current excitation-error cutoff. Increase |s_g| cutoff or rotate the crystal.", "warn");
+        } else {
+          setMessage("Geometry updated successfully.", "ok");
+        }
+      } catch (err) {
+        console.error(err);
+        setMessage(err.message || String(err), "error");
+      }
+    }
+
+    function resetCamera() {
+      cameraMemory = null;
+      updateApp();
+    }
+
+    function resetDefaults() {
+      cameraMemory = null;
+      setControls(DEFAULTS);
+      updateApp();
+    }
+
+    function syncNumberFromSlider(baseId) {
+      const slider = byId(`${baseId}Slider`);
+      const num = byId(baseId);
+      num.value = slider.value;
+    }
+
+    function syncSliderFromNumber(baseId) {
+      const slider = byId(`${baseId}Slider`);
+      const num = byId(baseId);
+      const value = clamp(Number(num.value), Number(slider.min), Number(slider.max));
+      slider.value = value;
+    }
+
+    function downloadExcitedCsv() {
+      if (!lastResults || lastResults.excited.length === 0) {
+        alert("There are no excited reflections to export with the current settings.");
+        return;
+      }
+
+      const detectorMap = new Map();
+      for (const rec of lastResults.detector) {
+        detectorMap.set(`${rec.h},${rec.k},${rec.l}`, rec);
+      }
+
+      const header = [
+        "h", "k", "l", "d_A", "sg_invA", "abs_sg_invA", "bragg_closeness_score",
+        "gx_invA", "gy_invA", "gz_invA", "kout_x", "kout_y", "kout_z", "x_det", "y_det"
+      ];
+
+      const rows = [header.join(",")];
+      for (const rec of lastResults.excited) {
+        const det = detectorMap.get(`${rec.h},${rec.k},${rec.l}`);
+        const row = [
+          rec.h,
+          rec.k,
+          rec.l,
+          rec.d,
+          rec.sg,
+          rec.absSg,
+          rec.score,
+          rec.gx,
+          rec.gy,
+          rec.gz,
+          rec.koutx,
+          rec.kouty,
+          rec.koutz,
+          det ? det.xdet : "",
+          det ? det.ydet : ""
+        ].map(v => typeof v === "number" ? String(v) : v);
+        rows.push(row.join(","));
+      }
+
+      const blob = new Blob([rows.join("\n") + "\n"], { type: "text/csv;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "excited_reflections.csv";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }
+
+    function installEventHandlers() {
+      for (const id of ids) {
+        byId(id).addEventListener("input", () => {
+          if (["phi", "theta", "psi"].includes(id)) {
+            syncSliderFromNumber(id);
+          }
+          scheduleUpdate();
+        });
+      }
+      for (const id of checkboxIds) {
+        byId(id).addEventListener("change", scheduleUpdate);
+      }
+      for (const baseId of ["phi", "theta", "psi"]) {
+        byId(`${baseId}Slider`).addEventListener("input", () => {
+          syncNumberFromSlider(baseId);
+          scheduleUpdate();
+        });
+      }
+      byId("updateButton").addEventListener("click", updateApp);
+      byId("resetButton").addEventListener("click", resetDefaults);
+      byId("downloadCsvButton").addEventListener("click", downloadExcitedCsv);
+      byId("cameraButton").addEventListener("click", resetCamera);
+
+      window.addEventListener("resize", () => {
+        Plotly.Plots.resize("plot3d");
+        Plotly.Plots.resize("plot2d");
+      });
+    }
+
+    function init() {
+      setControls(DEFAULTS);
+      installEventHandlers();
+      updateApp();
+    }
+
+    init();
+  </script>
+</body>
+</html>
