@@ -1,4 +1,4 @@
-const DATA_PATH = "dfm_sres_light_assets/data/sres_frame_sres.csv";
+const DATA_PATH = "sres_light_assets/data/sres_frame_sres.csv";
 
 const DETAIL_FIELDS = [
   ["frame", "Frame"],
