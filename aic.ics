@@ -1,0 +1,141 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:AIC2026-Schedule
+
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Stockholm:20260910T090000
+DTEND;TZID=Europe/Stockholm:20260910T120000
+DESCRIPTION:Lecture 1 covering chapters 1 and 2. Room C545.
+SUMMARY:AIC: Lecture 1 (Chapters 1-2)
+UID:aic-20260910-lecture1@aic2026
+END:VEVENT
+
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Stockholm:20260910T130000
+DTEND;TZID=Europe/Stockholm:20260910T160000
+DESCRIPTION:Accompanying exercises covering chapters 1 and 2. Room C545.
+SUMMARY:AIC: Exercises (Chapters 1-2)
+UID:aic-20260910-exercises12@aic2026
+END:VEVENT
+
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Stockholm:20260911T090000
+DTEND;TZID=Europe/Stockholm:20260911T120000
+DESCRIPTION:Lecture 2 covering chapters 3 and 8. Room C513-flexi.
+SUMMARY:AIC: Lecture 2 (Chapters 3 & 8)
+UID:aic-20260911-lecture2@aic2026
+END:VEVENT
+
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Stockholm:20260911T130000
+DTEND;TZID=Europe/Stockholm:20260911T160000
+DESCRIPTION:Accompanying exercises covering chapters 3 and 8. Room C513-flexi.
+SUMMARY:AIC: Exercises (Chapters 3 & 8)
+UID:aic-20260911-exercises38@aic2026
+END:VEVENT
+
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Stockholm:20260924T130000
+DTEND;TZID=Europe/Stockholm:20260924T160000
+DESCRIPTION:Wrap-up exercises covering chapters 1-3. Room C513.
+SUMMARY:AIC: Wrap-up exercises (Chapters 1-3)
+UID:aic-20260924-wrapup13@aic2026
+END:VEVENT
+
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Stockholm:20261008T090000
+DTEND;TZID=Europe/Stockholm:20261008T120000
+DESCRIPTION:Lecture 3 covering chapter 5: acid-base concepts. Room C513.
+SUMMARY:AIC: Lecture 3 (Acid-base concepts)
+UID:aic-20261008-lecture3@aic2026
+END:VEVENT
+
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Stockholm:20261008T130000
+DTEND;TZID=Europe/Stockholm:20261008T160000
+DESCRIPTION:Accompanying exercises covering chapter 5: acid-base concepts. Room C513.
+SUMMARY:AIC: Exercises (Chapter 5)
+UID:aic-20261008-exercises5@aic2026
+END:VEVENT
+
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Stockholm:20261009T090000
+DTEND;TZID=Europe/Stockholm:20261009T120000
+DESCRIPTION:Lecture 4 covering chapter 6: redox chemistry. Room C513.
+SUMMARY:AIC: Lecture 4 (Redox chemistry)
+UID:aic-20261009-lecture4@aic2026
+END:VEVENT
+
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Stockholm:20261009T130000
+DTEND;TZID=Europe/Stockholm:20261009T160000
+DESCRIPTION:Accompanying exercises covering chapter 6: redox chemistry. Room C513.
+SUMMARY:AIC: Exercises (Chapter 6)
+UID:aic-20261009-exercises6@aic2026
+END:VEVENT
+
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Stockholm:20261022T130000
+DTEND;TZID=Europe/Stockholm:20261022T160000
+DESCRIPTION:Wrap-up exercises covering chapters 5-6. Room C513.
+SUMMARY:AIC: Wrap-up exercises (Chapters 5-6)
+UID:aic-20261022-wrapup56@aic2026
+END:VEVENT
+
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Stockholm:20261109T090000
+DTEND;TZID=Europe/Stockholm:20261109T120000
+DESCRIPTION:Student presentations covering chapters 11-18. Three student presentations in total across the day. Room C513.
+SUMMARY:AIC: Student presentations (Chapters 11-18, AM)
+UID:aic-20261109-presentations-am@aic2026
+END:VEVENT
+
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Stockholm:20261109T130000
+DTEND;TZID=Europe/Stockholm:20261109T150000
+DESCRIPTION:Student presentations covering chapters 11-18. Three student presentations in total across the day. Room C513.
+SUMMARY:AIC: Student presentations (Chapters 11-18, PM)
+UID:aic-20261109-presentations-pm@aic2026
+END:VEVENT
+
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Stockholm:20261116T090000
+DTEND;TZID=Europe/Stockholm:20261116T120000
+DESCRIPTION:Student presentations covering chapters 7, 9, and 19-22. Three student presentations in total across the day. Room C513.
+SUMMARY:AIC: Student presentations (Chapters 7, 9, 19-22, AM)
+UID:aic-20261116-presentations-am@aic2026
+END:VEVENT
+
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Stockholm:20261116T130000
+DTEND;TZID=Europe/Stockholm:20261116T150000
+DESCRIPTION:Student presentations covering chapters 7, 9, and 19-22. Three student presentations in total across the day. Room C513.
+SUMMARY:AIC: Student presentations (Chapters 7, 9, 19-22, PM)
+UID:aic-20261116-presentations-pm@aic2026
+END:VEVENT
+
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Stockholm:20261211T090000
+DTEND;TZID=Europe/Stockholm:20261211T120000
+DESCRIPTION:Student presentations for the literature project. Room C513.
+SUMMARY:AIC: Literature project presentations (AM)
+UID:aic-20261211-literature-am@aic2026
+END:VEVENT
+
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Stockholm:20261211T130000
+DTEND;TZID=Europe/Stockholm:20261211T170000
+DESCRIPTION:Student presentations for the literature project. Room C513.
+SUMMARY:AIC: Literature project presentations (PM)
+UID:aic-20261211-literature-pm@aic2026
+END:VEVENT
+
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Stockholm:20270107T100000
+DTEND;TZID=Europe/Stockholm:20270107T160000
+DESCRIPTION:Final in-class examination.
+SUMMARY:AIC: Exam
+UID:aic-20270107-exam@aic2026
+END:VEVENT
+
+END:VCALENDAR
