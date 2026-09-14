@@ -1,6 +1,6 @@
 BEGIN:VCALENDAR
 VERSION:2.0
-PRODID:ZouGroup-Meetings-Buster-S1-2026
+PRODID:ZouGroup-Meetings-Buster-2026
 
 BEGIN:VEVENT
 DTSTART;TZID=Europe/Stockholm:20260112T150000
@@ -168,6 +168,118 @@ DTEND;TZID=Europe/Stockholm:20260616T102500
 DESCRIPTION:Time: 09:45–10:25. Note: Xiaodong not available Jan 15–24, Feb 6, Mar 17–18, Mar 30–31, Apr 16–24, Jun 8–11; contact her to reschedule if needed.
 SUMMARY:Individual meeting (Buster) – odd week
 UID:zougroup-20260616-ind-buster@zougroup
+END:VEVENT
+
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Stockholm:20260914T150000
+DTEND;TZID=Europe/Stockholm:20260914T170000
+DESCRIPTION:Time: 15:00-17:00. Place: C516. Your role: Marked X in schedule. Agenda: group seminar/subgroup discussion. Legend: S=own work (max 15 min/person + max 10 minutes discussion, max 15 slides). L=literature work (6 min/person + max 4 min discussion; send literature to chair Friday before). CH=chair. Upload presentations to "Zou's group folder" before 14:00 on the presentation day.
+SUMMARY:Zou group seminar (attendance)
+UID:zougroup-20260914-seminar-buster@zougroup
+END:VEVENT
+
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Stockholm:20260921T150000
+DTEND;TZID=Europe/Stockholm:20260921T170000
+DESCRIPTION:Time: 15:00-17:00. Place: C516. Your role: Attend (no specific duty listed for you). Agenda: group seminar/subgroup discussion. Legend: S=own work (max 15 min/person + max 10 minutes discussion, max 15 slides). L=literature work (6 min/person + max 4 min discussion; send literature to chair Friday before). CH=chair. Upload presentations to "Zou's group folder" before 14:00 on the presentation day.
+SUMMARY:Zou group seminar
+UID:zougroup-20260921-seminar-buster@zougroup
+END:VEVENT
+
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Stockholm:20260928T150000
+DTEND;TZID=Europe/Stockholm:20260928T170000
+DESCRIPTION:Time: 15:00-17:00. Place: C516. Your role: Present literature (L). Agenda: group seminar/subgroup discussion. Legend: S=own work (max 15 min/person + max 10 minutes discussion, max 15 slides). L=literature work (6 min/person + max 4 min discussion; send literature to chair Friday before). CH=chair. Upload presentations to "Zou's group folder" before 14:00 on the presentation day.
+SUMMARY:Zou group seminar: Literature presentation (Buster)
+UID:zougroup-20260928-seminar-buster@zougroup
+END:VEVENT
+
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Stockholm:20261005T150000
+DTEND;TZID=Europe/Stockholm:20261005T170000
+DESCRIPTION:Time: 15:00-17:00. Place: C516. Your role: Attend (no specific duty listed for you). Agenda: group seminar/subgroup discussion. Legend: S=own work (max 15 min/person + max 10 minutes discussion, max 15 slides). L=literature work (6 min/person + max 4 min discussion; send literature to chair Friday before). CH=chair. Upload presentations to "Zou's group folder" before 14:00 on the presentation day.
+SUMMARY:Zou group seminar
+UID:zougroup-20261005-seminar-buster@zougroup
+END:VEVENT
+
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Stockholm:20261102T150000
+DTEND;TZID=Europe/Stockholm:20261102T170000
+DESCRIPTION:Time: 15:00-17:00. Place: C516. Your role: Present own work (S). Agenda: group seminar/subgroup discussion. Legend: S=own work (max 15 min/person + max 10 minutes discussion, max 15 slides). L=literature work (6 min/person + max 4 min discussion; send literature to chair Friday before). CH=chair. Upload presentations to "Zou's group folder" before 14:00 on the presentation day.
+SUMMARY:Zou group seminar: Own-work presentation (Buster)
+UID:zougroup-20261102-seminar-buster@zougroup
+END:VEVENT
+
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Stockholm:20261116T150000
+DTEND;TZID=Europe/Stockholm:20261116T170000
+DESCRIPTION:Time: 15:00-17:00. Place: C516. Your role: Attend (no specific duty listed for you). Agenda: group seminar/subgroup discussion. Legend: S=own work (max 15 min/person + max 10 minutes discussion, max 15 slides). L=literature work (6 min/person + max 4 min discussion; send literature to chair Friday before). CH=chair. Upload presentations to "Zou's group folder" before 14:00 on the presentation day.
+SUMMARY:Zou group seminar
+UID:zougroup-20261116-seminar-buster@zougroup
+END:VEVENT
+
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Stockholm:20261207T150000
+DTEND;TZID=Europe/Stockholm:20261207T170000
+DESCRIPTION:Time: 15:00-17:00. Place: C516. Your role: Present literature (L). Agenda: group seminar/subgroup discussion. Legend: S=own work (max 15 min/person + max 10 minutes discussion, max 15 slides). L=literature work (6 min/person + max 4 min discussion; send literature to chair Friday before). CH=chair. Upload presentations to "Zou's group folder" before 14:00 on the presentation day.
+SUMMARY:Zou group seminar: Literature presentation (Buster)
+UID:zougroup-20261207-seminar-buster@zougroup
+END:VEVENT
+
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Stockholm:20260922T094500
+DTEND;TZID=Europe/Stockholm:20260922T102500
+DESCRIPTION:Time: 09:45-10:25. Note: Xiaodong is not available Oct 12-26, Nov 8-10, Nov 19-Dec 6; contact her to reschedule your meeting if needed.
+SUMMARY:Individual meeting (Buster) - odd week
+UID:zougroup-20260922-ind-buster@zougroup
+END:VEVENT
+
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Stockholm:20261006T094500
+DTEND;TZID=Europe/Stockholm:20261006T102500
+DESCRIPTION:Time: 09:45-10:25. Note: Xiaodong is not available Oct 12-26, Nov 8-10, Nov 19-Dec 6; contact her to reschedule your meeting if needed.
+SUMMARY:Individual meeting (Buster) - odd week
+UID:zougroup-20261006-ind-buster@zougroup
+END:VEVENT
+
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Stockholm:20261020T094500
+DTEND;TZID=Europe/Stockholm:20261020T102500
+DESCRIPTION:Time: 09:45-10:25. Note: Xiaodong is not available Oct 12-26, Nov 8-10, Nov 19-Dec 6; contact her to reschedule your meeting if needed.
+SUMMARY:Individual meeting (Buster) - odd week
+UID:zougroup-20261020-ind-buster@zougroup
+END:VEVENT
+
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Stockholm:20261103T094500
+DTEND;TZID=Europe/Stockholm:20261103T102500
+DESCRIPTION:Time: 09:45-10:25. Note: Xiaodong is not available Oct 12-26, Nov 8-10, Nov 19-Dec 6; contact her to reschedule your meeting if needed.
+SUMMARY:Individual meeting (Buster) - odd week
+UID:zougroup-20261103-ind-buster@zougroup
+END:VEVENT
+
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Stockholm:20261117T094500
+DTEND;TZID=Europe/Stockholm:20261117T102500
+DESCRIPTION:Time: 09:45-10:25. Note: Xiaodong is not available Oct 12-26, Nov 8-10, Nov 19-Dec 6; contact her to reschedule your meeting if needed.
+SUMMARY:Individual meeting (Buster) - odd week
+UID:zougroup-20261117-ind-buster@zougroup
+END:VEVENT
+
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Stockholm:20261201T094500
+DTEND;TZID=Europe/Stockholm:20261201T102500
+DESCRIPTION:Time: 09:45-10:25. Note: Xiaodong is not available Oct 12-26, Nov 8-10, Nov 19-Dec 6; contact her to reschedule your meeting if needed.
+SUMMARY:Individual meeting (Buster) - odd week
+UID:zougroup-20261201-ind-buster@zougroup
+END:VEVENT
+
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Stockholm:20261215T094500
+DTEND;TZID=Europe/Stockholm:20261215T102500
+DESCRIPTION:Time: 09:45-10:25. Note: Xiaodong is not available Oct 12-26, Nov 8-10, Nov 19-Dec 6; contact her to reschedule your meeting if needed.
+SUMMARY:Individual meeting (Buster) - odd week
+UID:zougroup-20261215-ind-buster@zougroup
 END:VEVENT
 
 END:VCALENDAR
