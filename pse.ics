@@ -1,0 +1,180 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:PhilosophyScienceEthics2026-Schedule
+
+BEGIN:VEVENT
+DTSTART;VALUE=DATE:20260921
+DTEND;VALUE=DATE:20260922
+DESCRIPTION:Anywhere: Start reading the literature.
+SUMMARY:Philosophy of Science and Ethics: Start reading
+UID:philsciethics-20260921-reading@philsciethics
+END:VEVENT
+
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Stockholm:20260928T130000
+DTEND;TZID=Europe/Stockholm:20260928T133000
+DESCRIPTION:Room C458: Course Introduction.
+SUMMARY:Philosophy of Science and Ethics: Course Introduction
+UID:philsciethics-20260928-introduction@philsciethics
+END:VEVENT
+
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Stockholm:20260928T133000
+DTEND;TZID=Europe/Stockholm:20260928T153000
+DESCRIPTION:Room C458: Do scientific facts have a history? Lecture by Annelie Drakman, The Department of the History of Science and Ideas, UU.
+SUMMARY:Philosophy of Science and Ethics: Do scientific facts have a history?
+UID:philsciethics-20260928-scientific-facts-history@philsciethics
+END:VEVENT
+
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Stockholm:20260928T153000
+DESCRIPTION:Self-organized: Groups meet to organize the assignment Ethics cases and schedule their internal discussions.
+SUMMARY:Philosophy of Science and Ethics: Ethics cases group planning
+UID:philsciethics-20260928-ethics-cases-planning@philsciethics
+END:VEVENT
+
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Stockholm:20260929T130000
+DTEND;TZID=Europe/Stockholm:20260929T150000
+DESCRIPTION:Room C458: Good and Bad Research practice 1. Lecture by Sara Belfrage, SU.
+SUMMARY:Philosophy of Science and Ethics: Good and Bad Research practice 1
+UID:philsciethics-20260929-research-practice-1@philsciethics
+END:VEVENT
+
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Stockholm:20261001T130000
+DTEND;TZID=Europe/Stockholm:20261001T150000
+DESCRIPTION:Room C458: Good and Bad Research practice 2. Lecture by Sara Belfrage, SU.
+SUMMARY:Philosophy of Science and Ethics: Good and Bad Research practice 2
+UID:philsciethics-20261001-research-practice-2@philsciethics
+END:VEVENT
+
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Stockholm:20261005T100000
+DTEND;TZID=Europe/Stockholm:20261005T113000
+DESCRIPTION:Room Bergsmannen: Open Science and Data Management. Lecture by Wilhelm Widmark, Chief Librarian, SU and Merlijn de Smit, Data Steward, SU.
+SUMMARY:Philosophy of Science and Ethics: Open Science and Data Management
+UID:philsciethics-20261005-open-science-data-management@philsciethics
+END:VEVENT
+
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Stockholm:20261005T113000
+DTEND;TZID=Europe/Stockholm:20261005T123000
+DESCRIPTION:Room Bergsmannen: Innovation and intellectual property. Lecture by Yasmin Andersson and Monica Ekberg, Innovation advisors, SU.
+SUMMARY:Philosophy of Science and Ethics: Innovation and intellectual property
+UID:philsciethics-20261005-innovation-ip@philsciethics
+END:VEVENT
+
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Stockholm:20261005T133000
+DTEND;TZID=Europe/Stockholm:20261005T143000
+DESCRIPTION:Room C458: Student influence on the PhD education. Presentations by PhD Councils and Student Union.
+SUMMARY:Philosophy of Science and Ethics: Student influence on PhD education
+UID:philsciethics-20261005-student-influence@philsciethics
+END:VEVENT
+
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Stockholm:20261005T143000
+DTEND;TZID=Europe/Stockholm:20261005T163000
+DESCRIPTION:Room C458: Science and values: On being a responsible scientist. Lecture by Erik Angner, Philosophy, SU.
+SUMMARY:Philosophy of Science and Ethics: Science and values
+UID:philsciethics-20261005-science-values@philsciethics
+END:VEVENT
+
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Stockholm:20261007T100000
+DTEND;TZID=Europe/Stockholm:20261007T110000
+DESCRIPTION:Room C458: The historical structure of scientific discovery. Seminar led by Annelie Drakman. Group A.
+SUMMARY:Philosophy of Science and Ethics: Scientific discovery seminar (Group A)
+UID:philsciethics-20261007-discovery-seminar-group-a@philsciethics
+END:VEVENT
+
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Stockholm:20261007T110000
+DTEND;TZID=Europe/Stockholm:20261007T120000
+DESCRIPTION:The historical structure of scientific discovery. Seminar led by Annelie Drakman. Group B.
+SUMMARY:Philosophy of Science and Ethics: Scientific discovery seminar (Group B)
+UID:philsciethics-20261007-discovery-seminar-group-b@philsciethics
+END:VEVENT
+
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Stockholm:20261007T130000
+DTEND;TZID=Europe/Stockholm:20261007T140000
+DESCRIPTION:The historical structure of scientific discovery. Seminar led by Annelie Drakman. Group C.
+SUMMARY:Philosophy of Science and Ethics: Scientific discovery seminar (Group C)
+UID:philsciethics-20261007-discovery-seminar-group-c@philsciethics
+END:VEVENT
+
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Stockholm:20261007T140000
+DTEND;TZID=Europe/Stockholm:20261007T150000
+DESCRIPTION:The historical structure of scientific discovery. Seminar led by Annelie Drakman. Group D.
+SUMMARY:Philosophy of Science and Ethics: Scientific discovery seminar (Group D)
+UID:philsciethics-20261007-discovery-seminar-group-d@philsciethics
+END:VEVENT
+
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Stockholm:20261009T130000
+DTEND;TZID=Europe/Stockholm:20261009T143000
+DESCRIPTION:Room C458: Ethics cases. Presentation and discussion of the assignment, Ulrika Nilsson, Kemikum, Andreas Barth, DBB. Group A.
+SUMMARY:Philosophy of Science and Ethics: Ethics cases (Group A)
+UID:philsciethics-20261009-ethics-cases-group-a@philsciethics
+END:VEVENT
+
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Stockholm:20261009T130000
+DTEND;TZID=Europe/Stockholm:20261009T143000
+DESCRIPTION:Room M414: Ethics cases. Presentation and discussion of the assignment, Ulrika Nilsson, Kemikum, Andreas Barth, DBB. Group B.
+SUMMARY:Philosophy of Science and Ethics: Ethics cases (Group B)
+UID:philsciethics-20261009-ethics-cases-group-b@philsciethics
+END:VEVENT
+
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Stockholm:20261009T143000
+DTEND;TZID=Europe/Stockholm:20261009T160000
+DESCRIPTION:Room C458: Ethics cases. Presentation and discussion of the assignment, Ulrika Nilsson, Kemikum, Andreas Barth, DBB. Group C.
+SUMMARY:Philosophy of Science and Ethics: Ethics cases (Group C)
+UID:philsciethics-20261009-ethics-cases-group-c@philsciethics
+END:VEVENT
+
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Stockholm:20261009T143000
+DTEND;TZID=Europe/Stockholm:20261009T160000
+DESCRIPTION:Room M414: Ethics cases. Presentation and discussion of the assignment, Ulrika Nilsson, Kemikum, Andreas Barth, DBB. Group D.
+SUMMARY:Philosophy of Science and Ethics: Ethics cases (Group D)
+UID:philsciethics-20261009-ethics-cases-group-d@philsciethics
+END:VEVENT
+
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Stockholm:20261012T100000
+DTEND;TZID=Europe/Stockholm:20261012T110000
+DESCRIPTION:Zoom: Image Integrity in Research Publication. Lecture by Jana Christopher, Image Integrity Analyst, FEBS Press.
+SUMMARY:Philosophy of Science and Ethics: Image Integrity in Research Publication
+UID:philsciethics-20261012-image-integrity@philsciethics
+END:VEVENT
+
+BEGIN:VEVENT
+DTSTART;VALUE=DATE:20261012
+DTEND;VALUE=DATE:20261013
+DESCRIPTION:Anywhere: Watch the movie Picture a scientist.
+SUMMARY:Philosophy of Science and Ethics: Watch Picture a scientist
+UID:philsciethics-20261012-picture-a-scientist@philsciethics
+END:VEVENT
+
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Stockholm:20261016T235900
+DTEND;TZID=Europe/Stockholm:20261017T000000
+DESCRIPTION:Canvas/Athena: History and Sociology. Deadline for uploading the written assignment.
+SUMMARY:Philosophy of Science and Ethics: History and Sociology assignment due
+UID:philsciethics-20261016-history-sociology-due@philsciethics
+END:VEVENT
+
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Stockholm:20261023T235900
+DTEND;TZID=Europe/Stockholm:20261024T000000
+DESCRIPTION:Canvas/Athena: Picture a scientist. Deadline for uploading the written assignment.
+SUMMARY:Philosophy of Science and Ethics: Picture a scientist assignment due
+UID:philsciethics-20261023-picture-a-scientist-due@philsciethics
+END:VEVENT
+
+END:VCALENDAR
