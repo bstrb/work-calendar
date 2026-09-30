@@ -67,11 +67,11 @@ UID:aic-20261009-lecture4@aic2026
 END:VEVENT
 
 BEGIN:VEVENT
-DTSTART;TZID=Europe/Stockholm:20261009T130000
-DTEND;TZID=Europe/Stockholm:20261009T160000
+DTSTART;TZID=Europe/Stockholm:20261013T130000
+DTEND;TZID=Europe/Stockholm:20261013T160000
 DESCRIPTION:Accompanying exercises covering chapter 6: redox chemistry. Room C513.
 SUMMARY:AIC: Exercises (Chapter 6)
-UID:aic-20261009-exercises6@aic2026
+UID:aic-20261013-exercises6@aic2026
 END:VEVENT
 
 BEGIN:VEVENT
