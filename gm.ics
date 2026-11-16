@@ -214,7 +214,7 @@ BEGIN:VEVENT
 DTSTART;TZID=Europe/Stockholm:20261116T150000
 DTEND;TZID=Europe/Stockholm:20261116T170000
 DESCRIPTION:Time: 15:00-17:00. Place: C516. Your role: Attend (no specific duty listed for you). Agenda: group seminar/subgroup discussion. Legend: S=own work (max 15 min/person + max 10 minutes discussion, max 15 slides). L=literature work (6 min/person + max 4 min discussion; send literature to chair Friday before). CH=chair. Upload presentations to "Zou's group folder" before 14:00 on the presentation day.
-SUMMARY:Zou group seminar
+SUMMARY:Zou group seminar: Literature presentation (Buster)
 UID:zougroup-20261116-seminar-buster@zougroup
 END:VEVENT
 
@@ -222,7 +222,7 @@ BEGIN:VEVENT
 DTSTART;TZID=Europe/Stockholm:20261207T150000
 DTEND;TZID=Europe/Stockholm:20261207T170000
 DESCRIPTION:Time: 15:00-17:00. Place: C516. Your role: Present literature (L). Agenda: group seminar/subgroup discussion. Legend: S=own work (max 15 min/person + max 10 minutes discussion, max 15 slides). L=literature work (6 min/person + max 4 min discussion; send literature to chair Friday before). CH=chair. Upload presentations to "Zou's group folder" before 14:00 on the presentation day.
-SUMMARY:Zou group seminar: Literature presentation (Buster)
+SUMMARY:Zou group seminar
 UID:zougroup-20261207-seminar-buster@zougroup
 END:VEVENT
 
